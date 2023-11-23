@@ -6,7 +6,7 @@
                 <div class="page-header-title">
                     <i class="feather icon-home bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Category</h5>
+                        <h5>Product</h5>
                     </div>
                 </div>
             </div>
@@ -14,9 +14,9 @@
                 <div class="page-header-breadcrumb">
                     <ul class=" breadcrumb breadcrumb-title">
                         <li class="breadcrumb-item">
-                            <a href="/admin/dashboard"><i class="feather icon-home"></i></a>
+                            <a href="/addmin/dashboard"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Category</a> </li>
+                        <li class="breadcrumb-item"><a href="#!">Product</a> </li>
                     </ul>
                 </div>
             </div>
@@ -32,30 +32,40 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Danh sách Category</h5>
+                                    <h5>Danh sách Product</h5>
 
-                                    <a href="/admin/categories/create" class="btn btn-info btn-sm">Tạo mới</a>
+                                    <a href="/admin/products/create" class="btn btn-info btn-sm">Tạo mới</a>
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
                                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Action</th>
+                                                    <th>Loại sản phẩm</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Giá niêm yết</th>
+                                                    <th>Giá khuyến mãi</th>
+                                                    <th>Ảnh</th>
+                                                    <th>Mô tả</th>
+                                                    <th>Trạng thái</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <?php foreach ($categories as $category) : ?>
+                                                <?php foreach ($products as $product) : ?>
                                                     <tr>
-                                                        <td><?= $category['id'] ?></td>
-                                                        <td><?= $category['name_category'] ?></td>
+                                                        <td><?= $product['category_id'] ?></td>
+                                                        <td><?= $product['product_name'] ?></td>
+                                                        <td><?= $product['product_price'] ?></td>
+                                                        <td><?= $product['product_price_sale'] ?></td>
+                                                        <td><?= $product['description'] ?></td>
+                                                        <td><?= $product['image'] ?></td>
+                                                        <td><?= $product['is_active'] ?></td>
+                                                        
                                                         <td>
-                                                            <a href="/admin/categories/update?id=<?= $category['id'] ?>" class="btn btn-primary btn-sm">Cập nhật</a>
+                                                            <a href="/admin/products/update?id=<?= $product['id'] ?>" class="btn btn-primary btn-sm">Cập nhật</a>
 
-                                                            <form action="/admin/categories/delete?id=<?= $category['id'] ?>" method="post">
+                                                            <form action="/admin/products/delete?id=<?= $product['id'] ?>" method="post">
                                                                 <button type="submit" onclick="return confirm('Bạn có chắc chắn xóa?');" class="btn btn-danger btn-sm mt-2">Xóa</button>
                                                             </form>
                                                         </td>
