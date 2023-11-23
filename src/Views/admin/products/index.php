@@ -38,34 +38,38 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
-                                        <table id="simpletable" class="table table-striped table-bordered nowrap">
+                                    <table id="simpletable" class="table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
-                                                    <th>Loại sản phẩm</th>
-                                                    <th>Tên sản phẩm</th>
-                                                    <th>Giá niêm yết</th>
-                                                    <th>Giá khuyến mãi</th>
-                                                    <th>Ảnh</th>
-                                                    <th>Mô tả</th>
-                                                    <th>Trạng thái</th>
+                                                    <th>ID</th>
+                                                    <th>Img</th>
+                                                    <th>Name</th>
+                                                    <th>Price</th>
+                                                    <th>Price sale</th>
+                                                    <th>Danh mục</th>
+                                                    <th>Active</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
                                                 <?php foreach ($products as $product) : ?>
                                                     <tr>
-                                                        <td><?= $product['category_id'] ?></td>
+                                                        <td><?= $product['id'] ?></td>
+                                                        <td>
+                                                            <img src="<?= $product['image'] ?>" alt="" width="100px">
+                                                        </td>
                                                         <td><?= $product['product_name'] ?></td>
                                                         <td><?= $product['product_price'] ?></td>
                                                         <td><?= $product['product_price_sale'] ?></td>
+                                                        <td><?= $arrayCategoryIdName[$product['category_id']] ?></td>
                                                         <td><?= $product['description'] ?></td>
-                                                        <td><?= $product['image'] ?></td>
-                                                        <td><?= $product['is_active'] ?></td>
-                                                        
+                                                        <td><?= $product['is_active'] ? 'Yes' : 'No' ?></td>
                                                         <td>
                                                             <a href="/admin/products/update?id=<?= $product['id'] ?>" class="btn btn-primary btn-sm">Cập nhật</a>
 
                                                             <form action="/admin/products/delete?id=<?= $product['id'] ?>" method="post">
+                                                                <input type="hidden" name="image" value="<?= $product['image'] ?>">
                                                                 <button type="submit" onclick="return confirm('Bạn có chắc chắn xóa?');" class="btn btn-danger btn-sm mt-2">Xóa</button>
                                                             </form>
                                                         </td>

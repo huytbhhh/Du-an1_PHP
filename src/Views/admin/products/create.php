@@ -36,30 +36,39 @@
                                 </div>
                                 <div class="card-block">
                                     <form action="" method="post" enctype="multipart/form-data">
-                                        <label for="id_categories">Loại sản phẩm:</label>
-                                        <input type="text" name="category_id" class="form-control">
+                                        <label for="product_name">Name</label>
+                                        <input type="text" name="product_name" id="name" class="form-control">
 
-                                        <label for="product_name">Name Product:</label>
-                                        <input type="text" name="product_name" class="form-control">
+                                        <label for="category_id">Category</label>
+                                        <select name="category_id" id="category_id" class="form-control">
+                                            <?php foreach ($categories as $category) : ?>
+                                                <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
 
-                                        <label for="product_price" class="mt-3">Price:</label>
-                                        <input type="number" name="product_price" class="form-control">
+                                        <label for="image">Img</label>
+                                        <input type="file" name="image" id="image" class="form-control">
 
-                                        <label for="product_price" class="mt-3">Price Sale:</label>
-                                        <input type="number" name="product_price_sale" class="form-control">
+                                        <label for="product_price">Price</label>
+                                        <input type="number" name="product_price" id="product_price" class="form-control">
 
-                                        <label for="image" class="mt-3">Image:</label>
-                                        <input type="file" name="image" class="form-control">
+                                        <label for="product_price_sale">Price sale</label>
+                                        <input type="number" name="product_price_sale" id="product_price_sale" class="form-control">
 
-                                        <label for="description" class="mt-3">Description:</label>
-                                        <input type="text" name="description" class="form-control">
+                                        <label for="is_active">Active</label>
+                                        <select name="is_active" id="is_active" class="form-control">
+                                            <option value="0">No</option>
+                                            <option value="1" selected>Yes</option>
+                                        </select>
 
-                                        <label for="is_active" class="mt-3">Trạng thái:</label>
-                                        <input type="text" name="is_active" class="form-control">
+                                        <label for="description">Description</label>
+                                        <textarea name="description" id="description" class="form-control"></textarea>
 
-                                        <button type="submit" name="btn-submit" class="btn btn-info mt-3">Thêm</button>
-                                        <a href="/admin/products" class="btn btn-primary mt-3">Danh sách Product</a>
+                                        <button type="submit" name="btn-submit" class="btn btn-info mt-3">Submit</button>
+                                        <a href="/admin/products" class="btn btn-primary mt-3">Quay lại d/s</a>
                                     </form>
+
+                                        
                                 </div>
                             </div>
                         </div>

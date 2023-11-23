@@ -18,7 +18,7 @@ class CategoryController extends Controller {
     public function create() {
         if (isset($_POST["btn-submit"])) { 
             $data = [
-                'name_category' => $_POST['name_category'],
+                'name' => $_POST['name'],
             ];
 
             (new Category())->insert($data);
@@ -34,7 +34,7 @@ class CategoryController extends Controller {
 
         if (isset($_POST["btn-submit"])) { 
             $data = [
-                'name_category' => $_POST['name_category'],
+                'name' => $_POST['name'],
             ];
 
             $conditions = [
