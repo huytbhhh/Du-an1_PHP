@@ -82,14 +82,7 @@
                                 <a href="#" class="remove">×</a>
                             </div>
                         </li>
-                        <li>
-                            <a href="single-product.html" class="image"><img src="/hmart/assets/images/product-image/3.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="single-product.html" class="title">Smart Music Box</a>
-                                <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
+                        
                     </ul>
                 </div>
                 <div class="foot">
@@ -160,23 +153,6 @@
                                                 <a href="#"><i class="fa fa-times"></i></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <a href="#"><img class="img-responsive ml-15px" src="/hmart/assets/images/product-image/2.webp" alt="" /></a>
-                                            </td>
-                                            <td class="product-name"><a href="#">Bluetooth Headphone</a></td>
-                                            <td class="product-price-cart"><span class="amount">$50.00</span></td>
-                                            <td class="product-quantity">
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">$80.00</td>
-                                            <td class="product-remove">
-                                                <a href="#"><i class="fa fa-pencil"></i></a>
-                                                <a href="#"><i class="fa fa-times"></i></a>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -184,7 +160,7 @@
                                 <div class="col-lg-12">
                                     <div class="cart-shiping-update-wrapper">
                                         <div class="cart-shiping-update">
-                                            <a href="#">Continue Shopping</a>
+                                            <a href="/">Continue Shopping</a>
                                         </div>
                                         <div class="cart-clear">
                                             <button>Update Shopping Cart</button>
