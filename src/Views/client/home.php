@@ -29,7 +29,7 @@
 
 
 
-        <?php require_once 'components/menu.php' ?>
+
 
         <!-- OffCanvas Menu End -->
         <!-- Hero/Intro Slider Start -->
@@ -143,7 +143,7 @@
                                                 </div>
                                                 <div class="content">
                                                     <span class="category"><a href="#">Accessories</a></span>
-                                                    <h5 class="title"><a href="single-product.html"><?= $product['product_name'] ?></a></h5>
+                                                    <h5 class="title"><a href="/single-product"><?= $product['product_name'] ?></a></h5>
                                                     <span class="price">
                                                         <span class="new">$<?= $product['product_price'] ?></span>
                                                     </span>
