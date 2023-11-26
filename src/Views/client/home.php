@@ -126,10 +126,48 @@
                             <!-- 1st tab start -->
                             <div class="tab-pane fade show active" id="newarrivals">
                                 <div class="row mb-n-30px">
+                                    <?php
+                                    
+                                    if(isset($_POST['id']) && isset($_POST['addToCart'])){
+
+                                        //kiểm tra session giỏ hàng đã tổn tại hay chưa
+                                        $id=$_POST['id'];
+                                        if(isset($_SESSION['cart']) &&!empty($_SESSION['cart'])){
+                                            $DataCart =[];//
+                                            $c=false;
+                                            // echo json_encode($_SESSION['cart']);
+                                            foreach($_SESSION['cart'] as $v){
+                                                // echo $v['count'];
+                                                if($v['id']==$id){
+                                                    $c=true;
+                                                    $DataCart[]=array("id"=>$v['id'],"count"=>$v['count']+1);
+                                                }
+                                                else $DataCart[]=array("id"=>$v['id'],"count"=>$v['count']);
+                                            }
+                                            
+                                            if(!$c)$DataCart[]=array("id"=>$id,"count"=>1);
+                                            $_SESSION['cart']=$DataCart;
+                                            echo "<script>alert('thêm thành công');window.location.href='./'</script>";
+
+
+                                        }
+                                        //nếu chưa thì tạo mới
+                                        else{
+                                            $_SESSION['cart'][]=array(
+                                                    "id"=>$id,
+                                                    "count"=>1,
+                                            );
+                                            echo "<script>alert('thêm thành công');window.location.href='./'</script>";
+                                        }
+                                        
+                                    }
+                                    ?>
+
                                     <!-- Sản phẩm -->
                                     <?php foreach ($products as $product) : ?>
-                                        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
+                                        <form method="post" action="./" class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                             <!-- Single Product -->
+                                            <input type="text" name="id" value="<?=$product['id']?>" style="display:none">
                                             <div class="product">
                                                 <span class="badges">
                                                     <span class="new">New</span>
@@ -149,13 +187,13 @@
                                                     </span>
                                                 </div>
                                                 <div class="actions">
-                                                    <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
+                                                    <button name="addToCart" title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i class="pe-7s-shopbag"></i></button>
                                                     <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i class="pe-7s-like"></i></button>
                                                     <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
                                                     <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i class="pe-7s-refresh-2"></i></button>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     <?php endforeach; ?>
 
                                     <!-- Sản phẩm 2 -->

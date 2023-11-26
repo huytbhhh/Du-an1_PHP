@@ -1,4 +1,5 @@
 <!-- CSS
+<?php include("./connect.php");?>
     ============================================ -->
     <link rel="stylesheet" href="/hmart/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/hmart/assets/css/font.awesome.css" />

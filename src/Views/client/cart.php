@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx" dir="ltr">
+<!-- <?php include("./connect.php");?> -->
 
 
 <!-- Mirrored from htmldemo.net/hmart/hmart/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 14:24:36 GMT -->
@@ -122,7 +123,19 @@
                 <h3 class="cart-page-title">Your cart items</h3>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <form action="#">
+                        <?php
+                        if(isset($_POST['deleteThis'])){
+                            // echo json_encode($_POST['id']);
+                            $id=$_POST['id'];
+                            $DataCart =[];//
+                            foreach($_SESSION['cart'] as $v)
+                            if($v['id']!=$id)$DataCart[]=array("id"=>$v['id'],"count"=>$v['count']);
+                            $_SESSION['cart']=$DataCart;
+                            echo "<script>alert('xoá thành công');window.location.href='#'</script>";
+
+                        }
+                        ?>
+                        <form action="#" method="post">
                             <div class="table-content table-responsive cart-table-content">
                                 <table>
                                     <thead>
@@ -136,23 +149,43 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                            <?php
+                                            // include("./connect.php");
+                                            // session_start();
+
+                                            if(isset($_SESSION['cart'])&&!empty($_SESSION['cart'])){
+                                                foreach($_SESSION['cart'] as $v){
+                                                    $product_detail=mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM products WHERE id='{$v['id']}'"));//thông tin sản phẩm lấy từ mysql
+                                                    ?>
                                         <tr>
+
                                             <td class="product-thumbnail">
                                                 <a href="#"><img class="img-responsive ml-15px" src="/hmart/assets/images/product-image/1.webp" alt="" /></a>
                                             </td>
-                                            <td class="product-name"><a href="#">Modern Smart Phone</a></td>
-                                            <td class="product-price-cart"><span class="amount">$60.00</span></td>
+                                            <input value="<?=$v['id']?>" name="id" type="text" style="display:none">
+                                            <td class="product-name"><a href="#"><?=$product_detail['product_name']?></a></td>
+                                            <td class="product-price-cart"><span class="amount">$<?=$product_detail['product_price']?></span></td>
                                             <td class="product-quantity">
                                                 <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
+                                                    <input class="cart-plus-minus-box" type="text" name="qtybutton" value="<?=$v['count']?>" />
                                                 </div>
                                             </td>
-                                            <td class="product-subtotal">$70.00</td>
+                                            <td class="product-subtotal">$<?=($v['count']*$product_detail['product_price'])?></td>
                                             <td class="product-remove">
                                                 <a href="#"><i class="fa fa-pencil"></i></a>
-                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                <button name="deleteThis"><i class="fa fa-times"></i></button>
                                             </td>
                                         </tr>
+
+                                                    <?php
+                                                }
+                                            }
+                                            // else{
+                                            //     echo "<td>Bạn chưa thêm hàng vào giỏ hàng</td>";
+                                            // }
+                                            
+                                            ?>
+                                            <!--  -->
                                     </tbody>
                                 </table>
                             </div>
@@ -162,10 +195,17 @@
                                         <div class="cart-shiping-update">
                                             <a href="/">Continue Shopping</a>
                                         </div>
-                                        <div class="cart-clear">
-                                            <button>Update Shopping Cart</button>
-                                            <a href="#">Clear Shopping Cart</a>
-                                        </div>
+                                        <?php
+                                        if(isset($_POST['clearCart'])){
+                                            $_SESSION['cart']=[];
+                                            echo "<script>alert('xoá thành công');window.location.href='#'</script>";
+                                        }
+                                       
+                                        ?>
+                                        <form action="#" method="post" class="cart-clear">
+                                            <button name="updateCart">Update Shopping Cart</button>
+                                            <button type="submit" name="clearCart" href="#">Clear Shopping Cart</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
