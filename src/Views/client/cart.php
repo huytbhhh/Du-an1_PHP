@@ -131,7 +131,7 @@
                             foreach($_SESSION['cart'] as $v)
                             if($v['id']!=$id)$DataCart[]=array("id"=>$v['id'],"count"=>$v['count']);
                             $_SESSION['cart']=$DataCart;
-                            echo "<script>alert('xoá thành công');window.location.href='#'</script>";
+                            echo "<script>alert('xoá thành công');window.location.href='/cart'</script>";
 
                         }
                         ?>
@@ -160,7 +160,7 @@
                                         <tr>
 
                                             <td class="product-thumbnail">
-                                                <a href="#"><img class="img-responsive ml-15px" src="/hmart/assets/images/product-image/1.webp" alt="" /></a>
+                                                <a href="#"><img class="img-responsive ml-15px" src="<?= $product_detail['image'] ?>" alt="" /></a>
                                             </td>
                                             <input value="<?=$v['id']?>" name="id" type="text" style="display:none">
                                             <td class="product-name"><a href="#"><?=$product_detail['product_name']?></a></td>

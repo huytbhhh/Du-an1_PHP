@@ -2,7 +2,7 @@
 <html lang="zxx" dir="ltr">
 
 
-<!-- Mirrored from htmldemo.net/hmart/hmart/single-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 14:24:37 GMT -->
+<!-- Mirrored from htmldemo.net/hmart/hmart/# by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 14:24:37 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,25 +33,25 @@
                 <div class="body customScroll">
                     <ul class="minicart-product-list">
                         <li>
-                            <a href="single-product.html" class="image"><img src="/hmart/assets/images/product-image/1.webp" alt="Cart product Image"></a>
+                            <a href="#" class="image"><img src="/hmart/assets/images/product-image/1.webp" alt="Cart product Image"></a>
                             <div class="content">
-                                <a href="single-product.html" class="title">Modern Smart Phone</a>
+                                <a href="#" class="title">Modern Smart Phone</a>
                                 <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
                                 <a href="#" class="remove">×</a>
                             </div>
                         </li>
                         <li>
-                            <a href="single-product.html" class="image"><img src="/hmart/assets/images/product-image/2.webp" alt="Cart product Image"></a>
+                            <a href="#" class="image"><img src="/hmart/assets/images/product-image/2.webp" alt="Cart product Image"></a>
                             <div class="content">
-                                <a href="single-product.html" class="title">Bluetooth Headphone</a>
+                                <a href="#" class="title">Bluetooth Headphone</a>
                                 <span class="quantity-price">1 x <span class="amount">$13.28</span></span>
                                 <a href="#" class="remove">×</a>
                             </div>
                         </li>
                         <li>
-                            <a href="single-product.html" class="image"><img src="/hmart/assets/images/product-image/3.webp" alt="Cart product Image"></a>
+                            <a href="#" class="image"><img src="/hmart/assets/images/product-image/3.webp" alt="Cart product Image"></a>
                             <div class="content">
-                                <a href="single-product.html" class="title">Smart Music Box</a>
+                                <a href="#" class="title">Smart Music Box</a>
                                 <span class="quantity-price">1 x <span class="amount">$17.34</span></span>
                                 <a href="#" class="remove">×</a>
                             </div>
@@ -73,28 +73,42 @@
                     <span class="title">Cart</span>
                     <button class="offcanvas-close">×</button>
                 </div>
+                <?php
+                if(isset($_GET['id'])){
+                    $id=$_GET['id'];
+                    
+              
+                    $d=mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM  products WHERE id=$id"));
+                    $p_name=$d['product_name'];
+                    $p_price=$d['product_price'];
+                    $p_des=$d['description'];
+
+
+
+                }
+                ?>
                 <div class="body customScroll">
                     <ul class="minicart-product-list">
                         <li>
-                            <a href="single-product.html" class="image"><img src="/hmart/assets/images/product-image/1.webp" alt="Cart product Image"></a>
+                            <a href="#" class="image"><img src="/hmart/assets/images/product-image/1.webp" alt="Cart product Image"></a>
                             <div class="content">
-                                <a href="single-product.html" class="title">Modern Smart Phone</a>
-                                <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
+                                <a href="#" class="title"><?=$p_name?></a>
+                                <span class="quantity-price">1 x <span class="amount">$<?=$p_price?></span></span>
                                 <a href="#" class="remove">×</a>
                             </div>
                         </li>
                         <li>
-                            <a href="single-product.html" class="image"><img src="/hmart/assets/images/product-image/2.webp" alt="Cart product Image"></a>
+                            <a href="#" class="image"><img src="/hmart/assets/images/product-image/2.webp" alt="Cart product Image"></a>
                             <div class="content">
-                                <a href="single-product.html" class="title">Bluetooth Headphone</a>
+                                <a href="#" class="title">Bluetooth Headphone</a>
                                 <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
                                 <a href="#" class="remove">×</a>
                             </div>
                         </li>
                         <li>
-                            <a href="single-product.html" class="image"><img src="/hmart/assets/images/product-image/3.webp" alt="Cart product Image"></a>
+                            <a href="#" class="image"><img src="/hmart/assets/images/product-image/3.webp" alt="Cart product Image"></a>
                             <div class="content">
-                                <a href="single-product.html" class="title">Smart Music Box</a>
+                                <a href="#" class="title">Smart Music Box</a>
                                 <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
                                 <a href="#" class="remove">×</a>
                             </div>
@@ -196,10 +210,10 @@
                     <!-- Chi tiết sản phẩm -->
                     <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
                         <div class="product-details-content quickview-content ml-25px">
-                            <h2>Modern Smart Phone</h2>
+                            <h2><?=$p_name?></h2>
                             <div class="pricing-meta">
                                 <ul class="d-flex">
-                                    <li class="new-price">$20.90</li>
+                                    <li class="new-price">$<?=$p_price?></li>
                                 </ul>
                             </div>
                             <div class="pro-details-rating-wrap">
@@ -212,7 +226,7 @@
                                 </div>
                                 <span class="read-review"><a class="reviews" href="#">(5 Customer Review)</a></span>
                             </div>
-                            <p class="mt-30px">Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmll tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exet commodo consequat. Duis aute irure dolor</p>
+                            <p class="mt-30px"><?=$p_des?></p>
                             <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
                                 <span>SKU:</span>
                                 <ul class="d-flex">
@@ -280,7 +294,7 @@
                                 <div id="des-details1" class="tab-pane active">
                                     <div class="product-description-wrapper">
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip efgx ea co consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occae cupidatat non proident, sunt in culpa qui
+                                            <?=$p_des?>
                                         </p>
                                     </div>
                                 </div>
@@ -421,14 +435,14 @@
                                         <span class="new">New</span>
                                         </span>
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
+                                            <a href="#" class="image">
                                                 <img src="/hmart/assets/images/product-image/1.webp" alt="Product" />
                                                 <img class="hover-image" src="/hmart/assets/images/product-image/1.webp" alt="Product" />
                                             </a>
                                         </div>
                                         <div class="content">
                                             <span class="category"><a href="#">Accessories</a></span>
-                                            <h5 class="title"><a href="single-product.html">Modern Smart Phone
+                                            <h5 class="title"><a href="#">Modern Smart Phone
                                                 </a>
                                             </h5>
                                             <span class="price">
@@ -454,14 +468,14 @@
                                         <span class="new">New</span>
                                         </span>
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
+                                            <a href="#" class="image">
                                                 <img src="/hmart/assets/images/product-image/2.webp" alt="Product" />
                                                 <img class="hover-image" src="/hmart/assets/images/product-image/2.webp" alt="Product" />
                                             </a>
                                         </div>
                                         <div class="content">
                                             <span class="category"><a href="#">Accessories</a></span>
-                                            <h5 class="title"><a href="single-product.html">Bluetooth Headphone
+                                            <h5 class="title"><a href="#">Bluetooth Headphone
                                                 </a>
                                             </h5>
                                             <span class="price">
@@ -487,14 +501,14 @@
                                         <span class="new">Sale</span>
                                         </span>
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
+                                            <a href="#" class="image">
                                                 <img src="/hmart/assets/images/product-image/3.webp" alt="Product" />
                                                 <img class="hover-image" src="/hmart/assets/images/product-image/3.webp" alt="Product" />
                                             </a>
                                         </div>
                                         <div class="content">
                                             <span class="category"><a href="#">Accessories</a></span>
-                                            <h5 class="title"><a href="single-product.html">Smart Music Box
+                                            <h5 class="title"><a href="#">Smart Music Box
                                                 </a>
                                             </h5>
                                             <span class="price">
@@ -519,14 +533,14 @@
                                         <span class="new">New</span>
                                         </span>
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
+                                            <a href="#" class="image">
                                                 <img src="/hmart/assets/images/product-image/4.webp" alt="Product" />
                                                 <img class="hover-image" src="/hmart/assets/images/product-image/1.webp" alt="Product" />
                                             </a>
                                         </div>
                                         <div class="content">
                                             <span class="category"><a href="#">Accessories</a></span>
-                                            <h5 class="title"><a href="single-product.html">Air Pods 25Hjkl Black
+                                            <h5 class="title"><a href="#">Air Pods 25Hjkl Black
                                                 </a>
                                             </h5>
                                             <span class="price">
@@ -550,14 +564,14 @@
                                         <span class="badges">
                                     </span>
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
+                                            <a href="#" class="image">
                                                 <img src="/hmart/assets/images/product-image/5.webp" alt="Product" />
                                                 <img class="hover-image" src="/hmart/assets/images/product-image/5.webp" alt="Product" />
                                             </a>
                                         </div>
                                         <div class="content">
                                             <span class="category"><a href="#">Accessories</a></span>
-                                            <h5 class="title"><a href="single-product.html">Smart Hand Watch
+                                            <h5 class="title"><a href="#">Smart Hand Watch
                                                 </a>
                                             </h5>
                                             <span class="price">
@@ -583,14 +597,14 @@
                                         <span class="new">Sale</span>
                                         </span>
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
+                                            <a href="#" class="image">
                                                 <img src="/hmart/assets/images/product-image/6.webp" alt="Product" />
                                                 <img class="hover-image" src="/hmart/assets/images/product-image/6.webp" alt="Product" />
                                             </a>
                                         </div>
                                         <div class="content">
                                             <span class="category"><a href="#">Accessories</a></span>
-                                            <h5 class="title"><a href="single-product.html">Smart Table Camera
+                                            <h5 class="title"><a href="#">Smart Table Camera
                                                 </a>
                                             </h5>
                                             <span class="price">
@@ -616,14 +630,14 @@
                                         <span class="new">Sale</span>
                                         </span>
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
+                                            <a href="#" class="image">
                                                 <img src="/hmart/assets/images/product-image/7.webp" alt="Product" />
                                                 <img class="hover-image" src="/hmart/assets/images/product-image/1.webp" alt="Product" />
                                             </a>
                                         </div>
                                         <div class="content">
                                             <span class="category"><a href="#">Accessories</a></span>
-                                            <h5 class="title"><a href="single-product.html">Round Pocket Router
+                                            <h5 class="title"><a href="#">Round Pocket Router
                                                 </a>
                                             </h5>
                                             <span class="price">
@@ -648,14 +662,14 @@
                                         <span class="sale">-5%</span>
                                         </span>
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
+                                            <a href="#" class="image">
                                                 <img src="/hmart/assets/images/product-image/8.webp" alt="Product" />
                                                 <img class="hover-image" src="/hmart/assets/images/product-image/8.webp" alt="Product" />
                                             </a>
                                         </div>
                                         <div class="content">
                                             <span class="category"><a href="#">Accessories</a></span>
-                                            <h5 class="title"><a href="single-product.html">Power Bank 10000Mhp
+                                            <h5 class="title"><a href="#">Power Bank 10000Mhp
                                                 </a>
                                             </h5>
                                             <span class="price">
@@ -984,5 +998,5 @@
 </body>
 
 
-<!-- Mirrored from htmldemo.net/hmart/hmart/single-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 14:24:37 GMT -->
+<!-- Mirrored from htmldemo.net/hmart/hmart/# by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 14:24:37 GMT -->
 </html>

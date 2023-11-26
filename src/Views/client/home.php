@@ -173,7 +173,7 @@
                                                     <span class="new">New</span>
                                                 </span>
                                                 <div class="thumb">
-                                                    <a href="/single-product" class="image">
+                                                    <a href="/single-product?id=<?=$product['id'] ?>" class="image">
 
                                                         <img src="<?= $product['image'] ?>" alt="Product" />
                                                         <img class="hover-image" src="<?= $product['image'] ?>" alt="Product" />
@@ -181,7 +181,7 @@
                                                 </div>
                                                 <div class="content">
                                                     <span class="category"><a href="#">Accessories</a></span>
-                                                    <h5 class="title"><a href="/single-product"><?= $product['product_name'] ?></a></h5>
+                                                    <h5 class="title"><a href="/single-product?id=<?=$product['id'] ?>"><?= $product['product_name'] ?></a></h5>
                                                     <span class="price">
                                                         <span class="new">$<?= $product['product_price'] ?></span>
                                                     </span>
@@ -197,7 +197,7 @@
                                     <?php endforeach; ?>
 
                                     <!-- Sản phẩm 2 -->
-                                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
+                                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px" style="display:none">
                                         <!-- Single Prodect -->
                                         <div class="product">
                                             <span class="badges">
