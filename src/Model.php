@@ -19,7 +19,7 @@ class Model
 
             $this->conn = new \PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
-            // set the PDO error mode to exception
+            // Thiết lập chế độ lỗi của PDO thành exception
             $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
             die($e->getMessage());
@@ -156,7 +156,15 @@ class Model
 
         $stmt->execute();
     }
+    public function searchProduct($search)
+    {
+        $sql = "SELECT * FROM products WHERE product_name LIKE :search";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':search', '%' . $search . '%', \PDO::PARAM_STR);
+        $stmt->execute();
 
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
     public function __destruct()
     {
         $this->conn = null;

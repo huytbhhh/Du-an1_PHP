@@ -147,7 +147,7 @@
                                         <li><a href="shop-4-column.html">DELL2</a></li>
                                         <li><a href="shop-left-sidebar.html">DELL3</a></li>
                                         <li><a href="shop-right-sidebar.html">DELL4</a></li>
-                                        
+
                                     </ul>
                                     <ul class="d-block">
                                         <li class="title"><a href="#">HP</a></li>
@@ -155,7 +155,7 @@
                                         <li><a href="single-product-variable.html">HP_1</a></li>
                                         <li><a href="single-product-affiliate.html">HP_1</a></li>
                                         <li><a href="single-product-group.html">HP_1</a></li>
-                                        
+
                                     </ul>
                                     <ul class="d-block">
                                         <li class="title"><a href="#">Lenovo</a></li>
@@ -163,7 +163,7 @@
                                         <li><a href="single-product-gallery-left.html">Lenovo1</a>
                                         <li><a href="single-product-gallery-right.html">Lenovo1</a> </li>
                                         <li><a href="single-product-sticky-left.html">Lenovo1</a></li>
-                                        
+
                                     </ul>
                                     <ul class="d-block p-0 border-0">
                                         <li class="title"><a href="#">Single Product Page</a></li>
@@ -196,12 +196,20 @@
         <div class="container">
             <!-- mobile search start -->
             <div class="search-element max-width-100">
-                <form action="#">
-                    <input type="text" placeholder="Search" />
-                    <button><i class="pe-7s-search"></i></button>
+                <form action="" method="post">
+                    <input type="text" placeholder="Search" name="search" />
+                    <button type="submit" name="btn"><i class="pe-7s-search"></i></button>
                 </form>
             </div>
             <!-- mobile search start -->
         </div>
     </div>
+    <?php
+    if (isset($_POST["btn"])) {
+        $search = $_POST["search"];
+    } else {
+        $search = false;
+    }
+    require_once("./src/Models/Product.php")
+    ?>
 </header>
