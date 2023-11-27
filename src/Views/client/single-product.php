@@ -191,6 +191,7 @@
                         </div>
                     </div>
                     <!-- Chi tiết sản phẩm -->
+                    <!-- Sửa ảnh  -->
                     <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
                         <div class="product-details-content quickview-content ml-25px">
                             <h2><?=$p_name?></h2>
