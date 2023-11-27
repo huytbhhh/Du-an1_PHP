@@ -13,7 +13,8 @@
     <meta name="description" content="Hmart-Smart Product eCommerce html Template">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/hmart/assets/images/favicon.ico" />
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <?php require_once 'components/head.php' ?>
 
 </head>
@@ -147,7 +148,10 @@
                                             
                                             if(!$c)$DataCart[]=array("id"=>$id,"count"=>1);
                                             $_SESSION['cart']=$DataCart;
-                                            echo "<script>alert('thêm thành công');window.location.href='./'</script>";
+                                        echo "<script>  Toastify({text: 'Đã thêm vào giỏ hàng',position: 'left',
+                                            gravity: 'top',duration: 2000}).showToast();</script>";
+
+                                            // echo "<script>alert('thêm thành công');window.location.href='./'</script>";
 
 
                                         }
@@ -157,7 +161,10 @@
                                                     "id"=>$id,
                                                     "count"=>1,
                                             );
-                                            echo "<script>alert('thêm thành công');window.location.href='./'</script>";
+                                        echo "<script>  Toastify({text: 'Đã thêm vào giỏ hàng sản phẩm này',position: 'left',
+                                            gravity: 'top',duration: 2000}).showToast();</script>";
+
+                                            // echo "<script>alert('thêm thành công');window.location.href='./'</script>";
                                         }
                                         
                                     }
@@ -173,7 +180,7 @@
                                                     <span class="new">New</span>
                                                 </span>
                                                 <div class="thumb">
-                                                    <a href="/single-product?id=<?=$product['id'] ?>" class="image">
+                                                    <a href="/single-product?id=<?=$product['id']?>" class="image">
 
                                                         <img src="<?= $product['image'] ?>" alt="Product" />
                                                         <img class="hover-image" src="<?= $product['image'] ?>" alt="Product" />
@@ -181,7 +188,7 @@
                                                 </div>
                                                 <div class="content">
                                                     <span class="category"><a href="#">Accessories</a></span>
-                                                    <h5 class="title"><a href="/single-product?id=<?=$product['id'] ?>"><?= $product['product_name'] ?></a></h5>
+                                                    <h5 class="title"><a href="/single-product"><?= $product['product_name'] ?></a></h5>
                                                     <span class="price">
                                                         <span class="new">$<?= $product['product_price'] ?></span>
                                                     </span>
