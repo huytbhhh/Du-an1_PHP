@@ -260,38 +260,38 @@
                             <div class="col-lg-4 col-md-6 mb-lm-30px">
                                 <div class="cart-tax">
                                     <div class="title-wrap">
-                                        <h4 class="cart-bottom-title section-bg-gray">Estimate Shipping And Tax</h4>
+                                        <h4 class="cart-bottom-title section-bg-gray">Thông tin người dùng</h4>
                                     </div>
                                     <div class="tax-wrapper">
-                                        <p>Enter your destination to get a shipping estimate.</p>
+                                        <p>Nhập các địa điểm</p>
                                         <div class="tax-select-wrapper">
                                             <div class="tax-select">
                                                 <label>
-                                                    * Country
+                                                    * Tỉnh
                                                 </label>
                                                 <select class="email s-email s-wid" required>
-                                                    <option>Bangladesh</option>
-                                                    <option>Albania</option>
-                                                    <option>Åland Islands</option>
-                                                    <option>Afghanistan</option>
-                                                    <option>Belgium</option>
+                                                    <option>Bắc Giang</option>
+                                                    <option>Hà nội</option>
+                                                    <option>Hà giang</option>
+                                                    <option>Hải dương</option>
+                                                    <option>Thái bình</option>
                                                 </select>
                                             </div>
                                             <div class="tax-select">
                                                 <label>
-                                                    * Region / State
+                                                    * Huyện,xã
                                                 </label>
                                                 <select class="email s-email s-wid" required>
-                                                    <option>Bangladesh</option>
-                                                    <option>Albania</option>
-                                                    <option>Åland Islands</option>
-                                                    <option>Afghanistan</option>
-                                                    <option>Belgium</option>
+                                                    <option>Lục Ngạn</option>
+                                                    <option>Lục Nam</option>
+                                                    <option>Tiên Nha</option>
+                                                    <option>Tân Sơn</option>
+                                                    <option>Phượng sơn</option>
                                                 </select>
                                             </div>
                                             <div class="tax-select mb-25px">
                                                 <label>
-                                                    * Zip/Postal Code
+                                                    * Số điện thoại
                                                 </label>
                                                 <input type="text" required />
                                             </div>
@@ -303,7 +303,7 @@
                             <div class="col-lg-4 col-md-6 mb-lm-30px">
                                 <div class="discount-code-wrapper">
                                     <div class="title-wrap">
-                                        <h4 class="cart-bottom-title section-bg-gray">Use Coupon Code</h4>
+                                        <h4 class="cart-bottom-title section-bg-gray">Mã giảm giá </h4>
                                     </div>
                                     <div class="discount-code">
                                         <p>Enter your coupon code if you have one.</p>
@@ -328,7 +328,7 @@
                                         </ul>
                                     </div>
                                     <h4 class="grand-totall-title">Tổng tiền <span>$<?=$total?>.00</span></h4>
-                                    <button style="border:1px #000 solid;padding:10px 20px"href="checkout.html" type="submit" name="checkout">Proceed to Checkout</button>
+                                    <button style="border:1px #000 solid;padding:10px 20px"href="checkout.html" type="submit" name="checkout">Đặt Hàng</button>
                                 </div>
                             </div>
                         </form>
@@ -338,8 +338,8 @@
         </div>
         <!-- Cart Area End -->
         <!-- Footer Area Start -->
-        
-        <?php require_once 'components/footer.php' ?>
+            
+            <?php require_once 'components/footer.php' ?>
 
         <!-- Footer Area End -->
     </div>
