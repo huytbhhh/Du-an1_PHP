@@ -81,6 +81,7 @@
                     $d=mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM  products WHERE id=$id"));
                     $p_name=$d['product_name'];
                     $p_price=$d['product_price'];
+                    $p_image=$d['image'];
                     $p_des=$d['description'];
 
 
@@ -90,7 +91,7 @@
                 <div class="body customScroll">
                     <ul class="minicart-product-list">
                         <li>
-                            <a href="#" class="image"><img src="/hmart/assets/images/product-image/1.webp" alt="Cart product Image"></a>
+                            <a href="#" class="image"><img src="<?=$p_image?>" alt="Cart product Image"></a>
                             <div class="content">
                                 <a href="#" class="title"><?=$p_name?></a>
                                 <span class="quantity-price">1 x <span class="amount">$<?=$p_price?></span></span>
@@ -151,32 +152,20 @@
                         <div class="swiper-container zoom-top">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/zoom-image/1.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/hmart/assets/images/product-image/zoom-image/1.webp">
+                                    <img class="img-responsive m-auto" src="<?=$p_image?>" alt="">
+                                    <a class="venobox full-preview" data-gall="myGallery" href="<?=$p_image?>">
                                         <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/zoom-image/2.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/hmart/assets/images/product-image/zoom-image/2.webp">
+                                    <img class="img-responsive m-auto" src="/hmart/assets/images/anh_laptop/HP/Laptop HP ENVY X360/HP-ENVY-X360-2-in-1-15-FH0013DX-3.jpg" alt="">
+                                    <a class="venobox full-preview" data-gall="myGallery" href="/hmart/assets/images/anh_laptop/HP/Laptop HP ENVY X360/HP-ENVY-X360-2-in-1-15-FH0013DX-3.jpg">
                                         <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                     </a>
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/zoom-image/3.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/hmart/assets/images/product-image/zoom-image/3.webp">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/zoom-image/4.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/hmart/assets/images/product-image/zoom-image/4.webp">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/zoom-image/5.webp" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/hmart/assets/images/product-image/zoom-image/5.webp">
+                                    <img class="img-responsive m-auto" src="/hmart/assets/images/anh_laptop/Lenovo/Laptop Lenovo Thinkpad X1/Lenovo-Thinkpad-X1-Nano-i7-Gen-1-3.jpg" alt="">
+                                    <a class="venobox full-preview" data-gall="myGallery" href="/hmart/assets/images/anh_laptop/Lenovo/Laptop Lenovo Thinkpad X1/Lenovo-Thinkpad-X1-Nano-i7-Gen-1-3.jpg">
                                         <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -185,19 +174,13 @@
                         <div class="swiper-container mt-20px zoom-thumbs slider-nav-style-1 small-nav">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/small-image/1.webp" alt="">
+                                    <img class="img-responsive m-auto" src="/hmart/assets/images/anh_laptop/Dell/Laptop Dell Inspiron 14/Dell-Inspiron-14-5430-2.jpg" alt="">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/small-image/2.webp" alt="">
+                                    <img class="img-responsive m-auto" src="/hmart/assets/images/anh_laptop/HP/Laptop HP ENVY X360/HP-ENVY-X360-2-in-1-15-FH0013DX-3.jpg" alt="">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/small-image/3.webp" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/small-image/4.webp" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/hmart/assets/images/product-image/small-image/5.webp" alt="">
+                                    <img class="img-responsive m-auto" src="/hmart/assets/images/anh_laptop/Lenovo/Laptop Lenovo Thinkpad X1/Lenovo-Thinkpad-X1-Nano-i7-Gen-1-3.jpg" alt="">
                                 </div>
                             </div>
                             <!-- Add Arrows -->
@@ -208,6 +191,7 @@
                         </div>
                     </div>
                     <!-- Chi tiết sản phẩm -->
+                    <!-- Sửa ảnh  -->
                     <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
                         <div class="product-details-content quickview-content ml-25px">
                             <h2><?=$p_name?></h2>

@@ -6,7 +6,7 @@
                 <div class="page-header-title">
                     <i class="feather icon-home bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Product</h5>
+                        <h5>Đơn hàng</h5>
                     </div>
                 </div>
             </div>
@@ -16,7 +16,7 @@
                         <li class="breadcrumb-item">
                             <a href="/admin/dashboard"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Product</a> </li>
+                        <li class="breadcrumb-item"><a href="#!">Đơn hàng</a> </li>
                     </ul>
                 </div>
             </div>
@@ -32,9 +32,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Danh sách Product</h5>
-
-                                    <a href="/admin/products/create" class="btn btn-info btn-sm">Tạo mới</a>
+                                    <h5>Danh sách đơn hàng</h5>
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
@@ -42,35 +40,27 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>Img</th>
-                                                    <th>Name</th>
-                                                    <th>Price</th>
-                                                    <th>Price sale</th>
-                                                    <th>Danh mục</th>
-                                                    <th>Active</th>
+                                                    <th>Tên người dùng</th>
+                                                    <th>Ngày mua</th>
+                                                    <th>Tổng tiền</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <?php foreach ($products as $product) : ?>
+                                                <?php foreach ($orders as $order) : ?>
                                                     <tr>
-                                                        <td><?= $product['id'] ?></td>
+                                                        <td><?= $order['order_id'] ?></td>
+                                                        <td><?= $order['user_id'] ?></td>
+                                                        <td><?= $order['order_date'] ?></td>
+                                                        <td><?= $order['total_amount'] ?></td>
+                                                        
                                                         <td>
-                                                            <img src="<?= $product['image'] ?>" alt="" width="100px">
-                                                        </td>
-                                                        <td><?= $product['product_name'] ?></td>
-                                                        <td><?= $product['product_price'] ?></td>
-                                                        <td><?= $product['product_price_sale'] ?></td>
-                                                        <td><?= $arrayCategoryIdName[$product['category_id']] ?></td>
-                                                        <td><?= $product['description'] ?></td>
-                                                        <td><?= $product['is_active'] ? 'Yes' : 'No' ?></td>
-                                                        <td>
-                                                            <a href="/admin/products/update?id=<?= $product['id'] ?>" class="btn btn-primary btn-sm">Cập nhật</a>
+                                                
 
-                                                            <form action="/admin/products/delete?id=<?= $product['id'] ?>" method="post">
-                                                                <input type="hidden" name="image" value="<?= $product['image'] ?>">
-                                                                <button type="submit" onclick="return confirm('Bạn có chắc chắn xóa?');" class="btn btn-danger btn-sm mt-2">Xóa</button>
+                                                            <form action="/admin/order/delete?id=<?= $order['id'] ?>" method="post">
+                                                                
+                                                                <button type="submit" onclick="return confirm('Bạn có chắc chắn hủy?');" class="btn btn-danger btn-sm mt-2">Hủy</button>
                                                             </form>
                                                         </td>
                                                     </tr>

@@ -4,6 +4,7 @@ namespace Ductong\BaseMvc\Controllers\Admin;
 
 use Ductong\BaseMvc\Controller;
 use Ductong\BaseMvc\Models\User;
+use Ductong\BaseMvc\Models\Role;
 
 class UserController extends Controller
 {
@@ -12,16 +13,29 @@ class UserController extends Controller
     */
     public function index() {
         $users = (new User)->all();
+        $roles = (new Role)->all();
+
+        $arrayRoleIdName = [];
+        foreach ($roles as $role) {
+            $arrayRoleIdName[$role['id']] = $role['name'];
+        }
         
-        $this->renderAdmin('users/index', ['users' => $users]);
+        $this->renderAdmin("users/index", 
+            [
+                "users" => $users, 
+                "arrayRoleIdName" => $arrayRoleIdName
+            ]
+        );
     }
 
     public function create() {
         if (isset($_POST['btn-submit'])) { 
             $data = [
-                'username' => $_POST['name'],
-                'address' => $_POST['address'],
+                'username' => $_POST['username'],
                 'email' => $_POST['email'],
+                'phone_number' => $_POST['phone_number'],
+                'address' => $_POST['address'],
+                'role' => $_POST['role'],
                 'password' => $_POST['password'],
             ];
 
@@ -36,9 +50,11 @@ class UserController extends Controller
     public function update() {
         if (isset($_POST['btn-submit'])) { 
             $data = [
-                'username' => $_POST['name'],
-                'address' => $_POST['address'],
+                'username' => $_POST['username'],
                 'email' => $_POST['email'],
+                'phone_number' => $_POST['phone_number'],
+                'address' => $_POST['address'],
+                'role' => $_POST['role'],
                 'password' => $_POST['password'],
             ];
 
