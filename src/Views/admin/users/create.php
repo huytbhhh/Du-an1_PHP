@@ -48,15 +48,11 @@
                                         <label for="address" class="mt-3">Address:</label>
                                         <input type="text" name="address" class="form-control">
 
-                                        <label for="role">Role</label>
-                                        <select name="role" id="role" class="form-control">
-                                            <?php foreach ($roles as $role) : ?>
-                                                <option value="<?= $role['id'] ?>"><?= $role['name'] ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-
                                         <label for="password" class="mt-3">Password:</label>
                                         <input type="password" name="password" class="form-control">
+
+                                        <label for="is_admin" class="mt-3">Is_admin:</label>
+                                        <input type="text" name="is_admin" class="form-control">
 
                                         <button type="submit" name="btn-submit" class="btn btn-info mt-3">Submit</button>
                                         <a href="/admin/users" class="btn btn-primary mt-3">Quay lại d/s</a>

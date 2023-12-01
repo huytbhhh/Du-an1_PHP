@@ -281,13 +281,15 @@
                                     <h4>register</h4>
                                 </a>
                             </div>
+                            
                             <div class="tab-content">
+                                <!-- Đăng nhập -->
                                 <div id="lg1" class="tab-pane active">
                                     <div class="login-form-container">
                                         <div class="login-register-form">
-                                            <form action="#" method="post">
-                                                <input type="text" name="user-name" placeholder="Username" />
-                                                <input type="password" name="user-password" placeholder="Password" />
+                                            <form action="/handleLogin" method="POST">
+                                                <input type="text" id="email" name="email" placeholder="Email" />
+                                                <input type="password" id="password" name="password" placeholder="Password" />
                                                 <div class="button-box">
                                                     <div class="login-toggle-btn">
                                                         <input type="checkbox" />
@@ -297,16 +299,23 @@
                                                     <button type="submit"><span>Login</span></button>
                                                 </div>
                                             </form>
+                                            
                                         </div>
                                     </div>
                                 </div>
+                                <!-- End Đăng nhập -->
+
+                                <!-- Đăng ký -->
                                 <div id="lg2" class="tab-pane">
                                     <div class="login-form-container">
                                         <div class="login-register-form">
-                                            <form action="#" method="post">
-                                                <input type="text" name="user-name" placeholder="Username" />
-                                                <input type="password" name="user-password" placeholder="Password" />
-                                                <input name="user-email" placeholder="Email" type="email" />
+                                            <form action="/admin/users/create" method="post">
+                                                <input name="username" placeholder="User Name" type="text" />
+                                                <input type="email" name="email" placeholder="Email" />
+                                                <input type="number" name="phone_number" placeholder="Phone" />
+                                                <input type="text" name="address" placeholder="Address" />
+                                                <input type="password" name="password" placeholder="Password" />
+                                                
                                                 <div class="button-box">
                                                     <button type="submit"><span>Register</span></button>
                                                 </div>
@@ -314,6 +323,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- End Đăng ký -->
                             </div>
                         </div>
                     </div>
