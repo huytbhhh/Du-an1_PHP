@@ -8,24 +8,15 @@ use Ductong\BaseMvc\Models\Role;
 
 class UserController extends Controller
 {
+
+   
     /*
         Đây là hàm hiển thị danh sách user
     */
     public function index() {
         $users = (new User)->all();
-        $roles = (new Role)->all();
-
-        $arrayRoleIdName = [];
-        foreach ($roles as $role) {
-            $arrayRoleIdName[$role['id']] = $role['name'];
-        }
         
-        $this->renderAdmin("users/index", 
-            [
-                "users" => $users, 
-                "arrayRoleIdName" => $arrayRoleIdName
-            ]
-        );
+        $this->renderAdmin('users/index', ['users' => $users]);
     }
 
     public function create() {
@@ -35,8 +26,8 @@ class UserController extends Controller
                 'email' => $_POST['email'],
                 'phone_number' => $_POST['phone_number'],
                 'address' => $_POST['address'],
-                'role' => $_POST['role'],
                 'password' => $_POST['password'],
+                'is_admin' => $_POST['is_admin'],
             ];
 
             (new User)->insert($data);
@@ -54,8 +45,8 @@ class UserController extends Controller
                 'email' => $_POST['email'],
                 'phone_number' => $_POST['phone_number'],
                 'address' => $_POST['address'],
-                'role' => $_POST['role'],
                 'password' => $_POST['password'],
+                'is_admin' => $_POST['is_admin'],
             ];
 
             $conditions = [

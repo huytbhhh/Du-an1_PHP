@@ -46,8 +46,8 @@
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
                                                     <th>Address</th>
-                                                    <th>Role</th>
                                                     <th>Password</th>
+                                                    <th>Is admin</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -60,8 +60,8 @@
                                                         <td><?= $user['email'] ?></td>
                                                         <td><?= $user['phone_number'] ?></td>
                                                         <td><?= $user['address'] ?></td>
-                                                        <td><?= $arrayRoleIdName[$user['role']] ?></td>
                                                         <td><?= $user['password'] ?></td>
+                                                        <td><?= $user['is_admin'] ?></td>
                                                         <td>
                                                             <a href="/admin/users/update?id=<?= $user['id'] ?>" class="btn btn-primary btn-sm">Cập nhật</a>
 
