@@ -13,7 +13,8 @@
                         <ul>
                             <li><a href="tel:0123456789"><i class="fa fa-phone"></i> +012 3456 789</a></li>
                             <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a></li>
-                            <li><a href="my-account.html"><i class="fa fa-user"></i> Account</a></li>
+                            <li><a href=" <?= isset($_SESSION['username']) ? "/logout" : "/login" ?>"><i class="fa fa-user"></i> <?= isset($_SESSION['username']) ? $_SESSION['username'] . " - đăng xuất" : "Login" ?></a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -27,13 +28,13 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-3 col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="/hmart/assets/images/logo/logo.png" alt="Site Logo" /></a>
+                        <a href="/"><img src="/hmart/assets/images/logo/logo.png" alt="Site Logo" /></a>
                     </div>
                 </div>
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="search-element">
-                        <form action="#">
-                            <input type="text" placeholder="Search" />
+                        <form action="" method="get">
+                            <input type="text" placeholder="Tìm kiếm sản phẩm" name="query" value="<?= isset($_GET['query']) ? $_GET['query'] : "" ?>" />
                             <button><i class="pe-7s-search"></i></button>
                         </form>
                     </div>
@@ -45,11 +46,11 @@
                             <i class="pe-7s-like"></i>
                         </a>
                         <!-- Single Wedge End -->
-                        <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
+                        <!-- <a href="/cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                             <i class="pe-7s-shopbag"></i>
-                            <span class="header-action-num">01</span>
-                            <!-- <span class="cart-amount">€30.00</span> -->
-                        </a>
+                        </a> -->
+                        <a href="/cart" class="header-action-btn"><i class="pe-7s-shopbag"></i></a>
+
                         <a href="#offcanvas-mobile-menu" class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
                             <i class="pe-7s-menu"></i>
                         </a>
@@ -65,7 +66,7 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-3 col">
                     <div class="header-logo">
-                        <a href="index.html"><img src="/hmart/assets/images/logo/logo.png" alt="Site Logo" /></a>
+                        <a href="/"><img src="/hmart/assets/images/logo/logo.png" alt="Site Logo" /></a>
                     </div>
                 </div>
                 <div class="col-lg-6 d-none d-lg-block">
@@ -83,7 +84,7 @@
                             <i class="pe-7s-like"></i>
                         </a>
                         <!-- Single Wedge End -->
-                        <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
+                        <a href="/cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                             <i class="pe-7s-shopbag"></i>
                             <span class="header-action-num">01</span>
                             <!-- <span class="cart-amount">€30.00</span> -->
@@ -103,9 +104,9 @@
             <div class="header-nav">
                 <div class="main-menu position-relative">
                     <ul>
-                        <li class="dropdown"><a href="#">Home</a>
+                        <li class="dropdown"><a href="/">Home</a>
                         </li>
-                        <li><a href="about.html">About</a></li>
+                        <li><a href="/about">About</a></li>
                         <li class="dropdown position-static"><a href="about.html">Pages <i class="fa fa-angle-down"></i></a>
                             <ul class="mega-menu d-block">
                                 <li class="d-flex">
@@ -125,8 +126,8 @@
                                     </ul>
                                     <ul class="d-block">
                                         <li class="title"><a href="#">Related Shop Pages</a></li>
-                                        <li><a href="my-account.html">Account Page</a></li>
-                                        <li><a href="login.html">Login & Register Page</a></li>
+                                        <li><a href="/login">Account Page</a></li>
+                                        <li><a href="/login">Login & Register Page</a></li>
                                         <li><a href="empty-cart.html">Empty Cart Page</a></li>
                                         <li><a href="thank-you-page.html">Thank You Page</a></li>
                                     </ul>
@@ -170,7 +171,7 @@
                                         <li><a href="checkout.html">Checkout Page</a></li>
                                         <li><a href="compare.html">Compare Page</a></li>
                                         <li><a href="wishlist.html">Wishlist Page</a></li>
-                                        <li><a href="my-account.html">Account Page</a></li>
+                                        <li><a href="/login">Account Page</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -196,20 +197,12 @@
         <div class="container">
             <!-- mobile search start -->
             <div class="search-element max-width-100">
-                <form action="" method="post">
-                    <input type="text" placeholder="Search" name="search" />
-                    <button type="submit" name="btn"><i class="pe-7s-search"></i></button>
+                <form action="#">
+                    <input type="text" placeholder="Search" />
+                    <button><i class="pe-7s-search"></i></button>
                 </form>
             </div>
             <!-- mobile search start -->
         </div>
     </div>
-    <?php
-    if (isset($_POST["btn"])) {
-        $search = $_POST["search"];
-    } else {
-        $search = false;
-    }
-    require_once("./src/Models/Product.php")
-    ?>
 </header>
