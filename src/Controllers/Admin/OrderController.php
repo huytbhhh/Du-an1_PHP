@@ -5,31 +5,33 @@ namespace Ductong\BaseMvc\Controllers\Admin;
 use Ductong\BaseMvc\Controller;
 use Ductong\BaseMvc\Models\Category;
 use Ductong\BaseMvc\Models\Product;
+use Ductong\BaseMvc\Models\Order;
 
-class ProductController extends Controller {
 
-    // public function __construct() {
-    //     check_auth();
-    // }
+class OrderController extends Controller {
+
+//     public function __construct() {
+//         check_auth();
+//     }
 
     /* Lấy danh sách */
     public function index() {
-        $products = (new Product())->all();
-        $categories = (new Category())->all();
+  
+     //    $order=(new Order())->all();
 
-        // Mảng này có cấu trúc, key là id danh mục, value là tên danh mục
-        // Tạo ra mảng này để hiển thị tên danh mục sản phẩm ở danh sách
-        $arrayCategoryIdName = [];
-        foreach ($categories as $category) {
-            $arrayCategoryIdName[$category['id']] = $category['name'];
-        }
+     //    $arrayCategoryIdName = [];
+     //    foreach ($categories as $category) {
+     //        $arrayCategoryIdName[$category['id']] = $category['name'];
+     //    }
 
-        $this->renderAdmin("products/index", 
-            [
-                "products" => $products, 
-                "arrayCategoryIdName" => $arrayCategoryIdName
-            ]
-        );
+        $this->renderAdmin("orders/index");
+
+     //    $this->renderAdmin("orders/index", 
+     //        [
+     //            "products" => $products, 
+     //            "arrayCategoryIdName" => $arrayCategoryIdName
+     //        ]
+     //    );
     }
 
     /* Thêm mới */
@@ -53,9 +55,9 @@ class ProductController extends Controller {
                 $pathSaveDB = '/uploads/' . $img['name'];
 
                 // Đường dẫn upload có thêm __DIR__ . '/../../../'
-                // vì File ProductController của mình đang cách thư mục uploads 3 cấp
+                // vì File OrderController của mình đang cách thư mục uploads 3 cấp
                 // Nên sẽ thấy có 3 lần ../
-                // __DIR__ là 2 const mặc định của PHP để lấy ra đường dẫn thư mục hiện tại của ProductController 
+                // __DIR__ là 2 const mặc định của PHP để lấy ra đường dẫn thư mục hiện tại của OrderController 
                 $pathUpload = __DIR__ . '/../../../uploads/' . $img['name'];
 
                 if (move_uploaded_file($img['tmp_name'], $pathUpload)) { 

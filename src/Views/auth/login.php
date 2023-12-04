@@ -287,16 +287,37 @@
                                 <div id="lg1" class="tab-pane active">
                                     <div class="login-form-container">
                                         <div class="login-register-form">
-                                            <form action="/handleLogin" method="POST">
-                                                <input type="text" id="email" name="email" placeholder="Email" />
-                                                <input type="password" id="password" name="password" placeholder="Password" />
+                                            <?php
+                                            $conn=mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+                                            mysqli_set_charset($conn, "utf8");
+                                            if(isset($_POST['submit'])){
+                                                
+                                                $email=$_POST['email'];
+                                                $pass=$_POST['password'];
+
+                                                $check=mysqli_fetch_array(mysqli_query($conn,"SELECT*FROM users WHERE email='$email' and password='$pass'"));
+                                                if($check){
+                                                    $_SESSION['username']=$check['username'];
+                                                    $_SESSION['user']=$check['username'];
+
+                                                    echo"<script>alert('login thành công');window.location.href='./'</script>";
+                                                }
+                                                else echo"<script>alert('tài khoản sai')</script>";
+
+                                            }
+                                            ?>
+                                            <!-- <form action="/handleLogin" method="POST"> -->
+                                            <form action="/login" method="POST">
+
+                                                <input type="text" id="email" name="email" placeholder="Email" value="admin@gmail.com" />
+                                                <input type="password" id="password" name="password" placeholder="Password" value="123456" />
                                                 <div class="button-box">
                                                     <div class="login-toggle-btn">
                                                         <input type="checkbox" />
                                                         <a class="flote-none" href="javascript:void(0)">Remember me</a>
                                                         <a href="#">Forgot Password?</a>
                                                     </div>
-                                                    <button type="submit"><span>Login</span></button>
+                                                    <button type="submit" name="submit"><span>Đăng nhập</span></button>
                                                 </div>
                                             </form>
                                             
@@ -306,18 +327,56 @@
                                 <!-- End Đăng nhập -->
 
                                 <!-- Đăng ký -->
+                                <?php
+                                //đã login thì chuyển về home
+                                if(isset($_SESSION['username'])){
+                                    echo"<script>alert('bạn đã login');window.location.href='/'</script>";
+
+                                }
+                                if(isset($_POST['res_submit'])){
+                                    $username=$_POST['username'];
+                                    $email=$_POST['email'];
+                                    $number=$_POST['phone_number'];
+                                    $address=$_POST['address'];
+                                    $password=$_POST['password'];
+
+                                    $checkUsername=mysqli_fetch_array(mysqli_query($conn,"SELECT*FROM users WHERE username='$username' LIMIT 1"));
+                                    $checkEmail=mysqli_fetch_array(mysqli_query($conn,"SELECT*FROM users WHERE email='$email' LIMIT 1"));
+                                    $checkPhone=mysqli_fetch_array(mysqli_query($conn,"SELECT*FROM users WHERE phone_number='$number' LIMIT 1"));
+
+
+                                    if($checkEmail)echo"<script>alert('Email đã tồn tại')</script>";
+                                    else if($checkPhone)echo"<script>alert('Phone đã tồn tại')</script>";
+                                    else if($checkUsername)echo"<script>alert('username đã tồn tại')</script>";
+                                    else{
+
+                                        $lastUser=mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM users ORDER BY id desc LIMIT 1"));
+                                        $role=0;
+                                        $id=$lastUser['id']+1;
+                                        @mysqli_query($conn,"INSERT into users(id,username,email,phone_number,address,password,is_admin)values($id,'$username','$email','$number','$address','$password',$role)");
+                                        echo"<script>alert('Đăng kí thành công, hãy đăng nhập lại !');window.location.href='#success_register'</script>";
+
+                                    }
+
+
+
+
+                                }
+                                ?>
                                 <div id="lg2" class="tab-pane">
                                     <div class="login-form-container">
                                         <div class="login-register-form">
-                                            <form action="/admin/users/create" method="post">
-                                                <input name="username" placeholder="User Name" type="text" />
-                                                <input type="email" name="email" placeholder="Email" />
-                                                <input type="number" name="phone_number" placeholder="Phone" />
-                                                <input type="text" name="address" placeholder="Address" />
-                                                <input type="password" name="password" placeholder="Password" />
+                                            <!-- <form action="/admin/users/create" method="post"> -->
+                                            <form action="/login" method="post">
+
+                                                <input name="username" placeholder="tên đăng nhập" type="text" required />
+                                                <input type="email" name="email" placeholder="Email" required />
+                                                <input type="number" name="phone_number" placeholder="Phone"  required/>
+                                                <input type="text" name="address" placeholder="Địa chỉ"  required/>
+                                                <input type="password" name="password" placeholder="Password"  required/>
                                                 
                                                 <div class="button-box">
-                                                    <button type="submit"><span>Register</span></button>
+                                                    <button type="submit" name="res_submit"><span>Đăng kí</span></button>
                                                 </div>
                                             </form>
                                         </div>
