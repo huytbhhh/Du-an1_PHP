@@ -171,7 +171,16 @@
                                     ?>
 
                                     <!-- Sản phẩm -->
-                                    <?php foreach ($products as $product) : ?>
+
+                                    
+                                    <?php 
+                                    $products=mysqli_query($conn,"SELECT * FROM products ");
+                                    if(isset($_GET['query'])){
+                                        $search_key=strtolower($_GET['query']);
+                                        $products=mysqli_query($conn,"SELECT * FROM products WHERE LOWER(product_name) like '%$search_key%'  ");
+
+                                    }
+                                    while($product=mysqli_fetch_assoc($products)){?>
                                         <form method="post" action="./" class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                             <!-- Single Product -->
                                             <input type="text" name="id" value="<?=$product['id']?>" style="display:none">
@@ -201,7 +210,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    <?php endforeach; ?>
+                                    <?php } ?>
 
                                     <!-- Sản phẩm 2 -->
                                     <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px" style="display:none">
