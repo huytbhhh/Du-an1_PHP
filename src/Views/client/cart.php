@@ -330,7 +330,7 @@
                                         <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
                                     </div>
                                     <div>
-                                        <input type="text" placeholder="địa chỉ nhận hàng" name="address" required>
+                                        <input type="text" placeholder="địa chỉ nhận hàng đây" name="address" required>
                                     </div>
                                     <h5>Số sản phẩm <span><?=isset($_SESSION['cart'])?count($_SESSION['cart']):0?></span></h5>
                                     <div class="total-shipping">
