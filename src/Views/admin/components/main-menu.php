@@ -46,8 +46,16 @@
                         <span class="pcoded-mtext">Quản lý đơn hàng</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/admin/contacts" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-layers"></i>
+                        </span>
+                        <span class="pcoded-mtext">Quản lý contact</span>
+                    </a>
+                </li>
 
-                
+
 
             </ul>
         </div>

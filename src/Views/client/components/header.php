@@ -13,8 +13,7 @@
                         <ul>
                             <li><a href="tel:0123456789"><i class="fa fa-phone"></i> +012 3456 789</a></li>
                             <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a></li>
-                            <li><a href=" <?=isset($_SESSION['username'])?"/logout":"/login"?>"><i class="fa fa-user"></i>  <?=isset($_SESSION['username'])?$_SESSION['username']." - đăng xuất":"Login"?></a></li>
-                           
+                            <li><a href="my-account.html"><i class="fa fa-user"></i> Account</a></li>
                         </ul>
                     </div>
                 </div>
@@ -33,8 +32,8 @@
                 </div>
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="search-element">
-                        <form action="" method="get">
-                            <input type="text" placeholder="Tìm kiếm sản phẩm" name="query" value="<?=isset($_GET['query'])?$_GET['query']:""?>" />
+                        <form action="#">
+                            <input type="text" placeholder="Search" />
                             <button><i class="pe-7s-search"></i></button>
                         </form>
                     </div>
@@ -72,7 +71,7 @@
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="search-element">
                         <form action="#">
-                            <input type="text" placeholder="Search"  />
+                            <input type="text" placeholder="Search" />
                             <button><i class="pe-7s-search"></i></button>
                         </form>
                     </div>
@@ -148,7 +147,7 @@
                                         <li><a href="shop-4-column.html">DELL2</a></li>
                                         <li><a href="shop-left-sidebar.html">DELL3</a></li>
                                         <li><a href="shop-right-sidebar.html">DELL4</a></li>
-                                        
+
                                     </ul>
                                     <ul class="d-block">
                                         <li class="title"><a href="#">HP</a></li>
@@ -156,7 +155,7 @@
                                         <li><a href="single-product-variable.html">HP_1</a></li>
                                         <li><a href="single-product-affiliate.html">HP_1</a></li>
                                         <li><a href="single-product-group.html">HP_1</a></li>
-                                        
+
                                     </ul>
                                     <ul class="d-block">
                                         <li class="title"><a href="#">Lenovo</a></li>
@@ -164,7 +163,7 @@
                                         <li><a href="single-product-gallery-left.html">Lenovo1</a>
                                         <li><a href="single-product-gallery-right.html">Lenovo1</a> </li>
                                         <li><a href="single-product-sticky-left.html">Lenovo1</a></li>
-                                        
+
                                     </ul>
                                     <ul class="d-block p-0 border-0">
                                         <li class="title"><a href="#">Single Product Page</a></li>
@@ -186,7 +185,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
