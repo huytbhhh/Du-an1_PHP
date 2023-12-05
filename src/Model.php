@@ -6,7 +6,6 @@ class Model
 {
     protected $conn;
     protected $table;
-    protected $db;
 
     protected $columns;
 
@@ -157,7 +156,6 @@ class Model
 
         $stmt->execute();
     }
-
 
     public function __destruct()
     {

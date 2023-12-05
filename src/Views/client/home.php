@@ -14,7 +14,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/hmart/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <?php require_once 'components/head.php' ?>
 
 </head>
@@ -128,26 +128,27 @@
                             <div class="tab-pane fade show active" id="newarrivals">
                                 <div class="row mb-n-30px">
                                     <?php
-
-                                    if (isset($_POST['id']) && isset($_POST['addToCart'])) {
+                                    
+                                    if(isset($_POST['id']) && isset($_POST['addToCart'])){
 
                                         //kiểm tra session giỏ hàng đã tổn tại hay chưa
-                                        $id = $_POST['id'];
-                                        if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                                            $DataCart = []; //
-                                            $c = false;
+                                        $id=$_POST['id'];
+                                        if(isset($_SESSION['cart']) &&!empty($_SESSION['cart'])){
+                                            $DataCart =[];//
+                                            $c=false;
                                             // echo json_encode($_SESSION['cart']);
-                                            foreach ($_SESSION['cart'] as $v) {
+                                            foreach($_SESSION['cart'] as $v){
                                                 // echo $v['count'];
-                                                if ($v['id'] == $id) {
-                                                    $c = true;
-                                                    $DataCart[] = array("id" => $v['id'], "count" => $v['count'] + 1);
-                                                } else $DataCart[] = array("id" => $v['id'], "count" => $v['count']);
+                                                if($v['id']==$id){
+                                                    $c=true;
+                                                    $DataCart[]=array("id"=>$v['id'],"count"=>$v['count']+1);
+                                                }
+                                                else $DataCart[]=array("id"=>$v['id'],"count"=>$v['count']);
                                             }
-
-                                            if (!$c) $DataCart[] = array("id" => $id, "count" => 1);
-                                            $_SESSION['cart'] = $DataCart;
-                                            echo "<script>  Toastify({text: 'Đã thêm vào giỏ hàng',position: 'left',
+                                            
+                                            if(!$c)$DataCart[]=array("id"=>$id,"count"=>1);
+                                            $_SESSION['cart']=$DataCart;
+                                        echo "<script>  Toastify({text: 'Đã thêm vào giỏ hàng',position: 'left',
                                             gravity: 'top',duration: 2000}).showToast();</script>";
 
                                             // echo "<script>alert('thêm thành công');window.location.href='./'</script>";
@@ -155,38 +156,40 @@
 
                                         }
                                         //nếu chưa thì tạo mới
-                                        else {
-                                            $_SESSION['cart'][] = array(
-                                                "id" => $id,
-                                                "count" => 1,
+                                        else{
+                                            $_SESSION['cart'][]=array(
+                                                    "id"=>$id,
+                                                    "count"=>1,
                                             );
-                                            echo "<script>  Toastify({text: 'Đã thêm vào giỏ hàng sản phẩm này',position: 'left',
+                                        echo "<script>  Toastify({text: 'Đã thêm vào giỏ hàng sản phẩm này',position: 'left',
                                             gravity: 'top',duration: 2000}).showToast();</script>";
 
                                             // echo "<script>alert('thêm thành công');window.location.href='./'</script>";
                                         }
+                                        
                                     }
                                     ?>
 
                                     <!-- Sản phẩm -->
 
+                                    
+                                    <?php 
+                                    $products=mysqli_query($conn,"SELECT * FROM products ");
+                                    if(isset($_GET['query'])){
+                                        $search_key=strtolower($_GET['query']);
+                                        $products=mysqli_query($conn,"SELECT * FROM products WHERE LOWER(product_name) like '%$search_key%'  ");
 
-                                    <?php
-                                    $products = mysqli_query($conn, "SELECT * FROM products ");
-                                    if (isset($_GET['query'])) {
-                                        $search_key = strtolower($_GET['query']);
-                                        $products = mysqli_query($conn, "SELECT * FROM products WHERE LOWER(product_name) like '%$search_key%'  ");
                                     }
-                                    while ($product = mysqli_fetch_assoc($products)) { ?>
+                                    while($product=mysqli_fetch_assoc($products)){?>
                                         <form method="post" action="./" class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                             <!-- Single Product -->
-                                            <input type="text" name="id" value="<?= $product['id'] ?>" style="display:none">
+                                            <input type="text" name="id" value="<?=$product['id']?>" style="display:none">
                                             <div class="product">
                                                 <span class="badges">
                                                     <span class="new">New</span>
                                                 </span>
                                                 <div class="thumb">
-                                                    <a href="/single-product?id=<?= $product['id'] ?>" class="image">
+                                                    <a href="/single-product?id=<?=$product['id']?>" class="image">
 
                                                         <img src="<?= $product['image'] ?>" alt="Product" />
                                                         <img class="hover-image" src="<?= $product['image'] ?>" alt="Product" />
@@ -241,11 +244,11 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                   
                                 </div>
                             </div>
                             <!-- 1st tab end -->
-
+                            
                         </div>
                     </div>
                 </div>
@@ -265,11 +268,11 @@
         </div> -->
         <!-- Fashion Area End -->
         <!-- Feature product area start -->
-
+        
         <!-- Feature product area End -->
         <!-- Testimonial area start -->
 
-
+        
 
         <!-- Testimonial area end-->
         <!-- Brand area start -->
@@ -296,7 +299,7 @@
         <!-- Brand area end -->
         <!-- Blog area start from here -->
 
-
+        
         <!-- Blog area end here -->
         <!-- Footer Area Start -->
         <?php require_once 'components/footer.php' ?>
@@ -359,72 +362,72 @@
                         </div>
                         <!-- Start chi tiết -->
                         <?php foreach ($products as $product) : ?>
-                            <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
-                                <div class="product-details-content quickview-content">
-                                    <h2><?= $product['product_name'] ?></h2>
-                                    <div class="pricing-meta">
-                                        <ul class="d-flex">
-                                            <li class="new-price">$<?= $product['product_price'] ?></li>
-                                        </ul>
+                        <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
+                            <div class="product-details-content quickview-content">
+                                <h2><?= $product['product_name'] ?></h2>
+                                <div class="pricing-meta">
+                                    <ul class="d-flex">
+                                        <li class="new-price">$<?= $product['product_price'] ?></li>
+                                    </ul>
+                                </div>
+                                <div class="pro-details-rating-wrap">
+                                    <div class="rating-product">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
                                     </div>
-                                    <div class="pro-details-rating-wrap">
-                                        <div class="rating-product">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <span class="read-review"><a class="reviews" href="#">( 2 Review )</a></span>
+                                    <span class="read-review"><a class="reviews" href="#">( 2 Review )</a></span>
+                                </div>
+                                <p class="mt-30px">Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmll tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exet commodo consequat. Duis aute irure dolor</p>
+                                <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+                                    <span>SKU:</span>
+                                    <ul class="d-flex">
+                                        <li>
+                                            <a href="#">Ch-256xl</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+                                    <span>Categories: </span>
+                                    <ul class="d-flex">
+                                        <li>
+                                            <a href="#">Smart Device, </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">ETC</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+                                    <span>Tags: </span>
+                                    <ul class="d-flex">
+                                        <li>
+                                            <a href="#">Smart Device, </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Phone</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="pro-details-quality">
+                                    <div class="cart-plus-minus">
+                                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
                                     </div>
-                                    <p class="mt-30px">Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmll tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exet commodo consequat. Duis aute irure dolor</p>
-                                    <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
-                                        <span>SKU:</span>
-                                        <ul class="d-flex">
-                                            <li>
-                                                <a href="#">Ch-256xl</a>
-                                            </li>
-                                        </ul>
+                                    <div class="pro-details-cart">
+                                        <button class="add-cart"> Add To
+                                            Cart</button>
                                     </div>
-                                    <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
-                                        <span>Categories: </span>
-                                        <ul class="d-flex">
-                                            <li>
-                                                <a href="#">Smart Device, </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">ETC</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
-                                        <span>Tags: </span>
-                                        <ul class="d-flex">
-                                            <li>
-                                                <a href="#">Smart Device, </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Phone</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="pro-details-quality">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                        </div>
-                                        <div class="pro-details-cart">
-                                            <button class="add-cart"> Add To
-                                                Cart</button>
-                                        </div>
-                                        <div class="pro-details-compare-wishlist pro-details-wishlist ">
-                                            <a href="wishlist.html"><i class="pe-7s-like"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="payment-img">
-                                        <a href="#"><img src="/hmart/assets/images/icons/payment.png" alt=""></a>
+                                    <div class="pro-details-compare-wishlist pro-details-wishlist ">
+                                        <a href="wishlist.html"><i class="pe-7s-like"></i></a>
                                     </div>
                                 </div>
+                                <div class="payment-img">
+                                    <a href="#"><img src="/hmart/assets/images/icons/payment.png" alt=""></a>
+                                </div>
                             </div>
+                        </div>
                         <?php endforeach; ?>
                         <!-- End chi tiết -->
                     </div>
@@ -442,14 +445,14 @@
                     <div class="tt-modal-messages">
                         <i class="pe-7s-check"></i> Added to cart successfully!
                     </div>
-
+                   
                     <div class="tt-modal-product">
                         <div class="tt-img">
                             <img src="<?= $product['image'] ?>" alt="Modern Smart Phone">
                         </div>
                         <h2 class="tt-title"><a href="#"><?= $product['product_name'] ?></a></h2>
                     </div>
-
+                        
                 </div>
             </div>
         </div>

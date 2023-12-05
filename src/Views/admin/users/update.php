@@ -36,17 +36,25 @@
                                 </div>
                                 <div class="card-block">
                                     <form action="" method="post">
-                                        <label for="name">Name</label>
-                                        <input type="text" name="name" class="form-control" value="<?= $user['username'] ?>">
+                                        <label for="username">Name</label>
+                                        <input type="text" name="username" class="form-control" value="<?= $user['username'] ?>">
 
                                         <label for="address" class="mt-3">Email</label>
                                         <input type="email" name="email" class="form-control" value="<?= $user['email'] ?>">
 
-                                        <label for="password" class="mt-3">Password</label>
-                                        <input type="password" name="password" class="form-control" value="<?= $user['password'] ?>">
+                                        <label for="phone_number" class="mt-3">Phone</label>
+                                        <input type="text" name="phone_number" class="form-control" value="<?= $user['phone_number'] ?>">
 
                                         <label for="address" class="mt-3">Address</label>
                                         <input type="text" name="address" class="form-control" value="<?= $user['address'] ?>">
+
+                                        <label for="password" class="mt-3">Password</label>
+                                        <input type="password" name="password" class="form-control" value="<?= $user['password'] ?>">
+
+                                        
+
+                                        <label for="is_admin" class="mt-3">Is_admin</label>
+                                        <input type="text" name="is_admin" class="form-control" value="<?= $user['is_admin'] ?>">
 
                                         <button type="submit" name="btn-submit" class="btn btn-info mt-3">Submit</button>
                                         <a href="/admin/users" class="btn btn-primary mt-3">Quay lại d/s</a>

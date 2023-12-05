@@ -4,8 +4,7 @@ namespace Ductong\BaseMvc\Models;
 
 use Ductong\BaseMvc\Model;
 
-class Product extends Model
-{
+class Product extends Model {
     protected $table = 'products';
     protected $columns = [
         'category_id',
@@ -18,8 +17,7 @@ class Product extends Model
     ];
 
     // Lấy ra 10 sản phẩm mới nhất, được order by theo ID sản phẩm
-    public function getLatestLimit10()
-    {
+    public function getLatestLimit10() {
         $sql = "
             SELECT 
                 p.product_name p_product_name,
@@ -46,8 +44,7 @@ class Product extends Model
     }
 
     // Lấy ra tất cả sản phẩm theo ID danh mục, được order by theo ID sản phẩm
-    public function getAllByCategoryID($categoryID)
-    {
+    public function getAllByCategoryID($categoryID) {
         $sql = "
             SELECT 
                 p.product_name p_product_name,

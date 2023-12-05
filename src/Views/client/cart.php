@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx" dir="ltr">
+<!-- <?php include("./connect.php");?> -->
 
 
 <!-- Mirrored from htmldemo.net/hmart/hmart/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 14:24:36 GMT -->
@@ -12,7 +13,8 @@
     <meta name="description" content="Hmart-Smart Product eCommerce html Template">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/hmart/assets/images/favicon.ico" />
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <?php require_once 'components/head.php' ?>
 </head>
 
@@ -82,14 +84,7 @@
                                 <a href="#" class="remove">×</a>
                             </div>
                         </li>
-                        <li>
-                            <a href="single-product.html" class="image"><img src="/hmart/assets/images/product-image/3.webp" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="single-product.html" class="title">Smart Music Box</a>
-                                <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
+                        
                     </ul>
                 </div>
                 <div class="foot">
@@ -129,7 +124,35 @@
                 <h3 class="cart-page-title">Your cart items</h3>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <form action="#">
+                        <?php
+                        if(isset($_POST['deleteThis'])){
+                            // echo json_encode($_POST['id']);
+                            $id=$_POST['id'];
+                            $DataCart =[];//
+                            foreach($_SESSION['cart'] as $v)
+                            if($v['id']!=$id)$DataCart[]=array("id"=>$v['id'],"count"=>$v['count']);
+                            $_SESSION['cart']=$DataCart;
+                            echo "<script>alert('xoá thành công');window.location.href='/cart'</script>";
+
+                        }
+                        else if(isset($_POST['updateCart'])){
+                            // $id=$_POST['id'];
+                            // $count=$_POST['qtybutton[]'];
+                            $data=[];
+                            for($i=0;$i<count($_POST['id']);$i++){
+                                $data[]=array(
+                                    "id"=>$_POST['id'][$i],
+                                    "count"=>$_POST['count'][$i],
+                                );
+                            }
+                            $_SESSION['cart']=$data;
+                            echo "<script>alert('Cập nhật thành công');window.location.href='/cart'</script>";
+
+                            // echo json_encode($id);
+
+                        }
+                        ?>
+                        <form action="#" method="post">
                             <div class="table-content table-responsive cart-table-content">
                                 <table>
                                     <thead>
@@ -143,40 +166,52 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                            <?php
+                                            // include("./connect.php");
+                                            // session_start();
+                                            if(isset($_GET['index'])){
+                               
+                                                array_splice($_SESSION['cart'], $_GET['index'], 1);
+                                                echo "<script>alert('Xoá thành công');window.location.href='./cart'</script>";
+                                            }
+                                            $total=0;
+                                            $count=0;
+                                            if(isset($_SESSION['cart'])&&!empty($_SESSION['cart'])){
+                                                foreach($_SESSION['cart'] as $v){
+                                                    $product_detail=mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM products WHERE id='{$v['id']}'"));//thông tin sản phẩm lấy từ mysql
+                                                    $total+=($v['count']*$product_detail['product_price']);//tổng tiền
+                                                ?>
                                         <tr>
+
                                             <td class="product-thumbnail">
-                                                <a href="#"><img class="img-responsive ml-15px" src="/hmart/assets/images/product-image/1.webp" alt="" /></a>
+                                                <a href="#"><img class="img-responsive ml-15px" src="<?=$product_detail['image']?>" alt="" /></a>
                                             </td>
-                                            <td class="product-name"><a href="#">Modern Smart Phone</a></td>
-                                            <td class="product-price-cart"><span class="amount">$60.00</span></td>
+                                            <input value="<?=$v['id']?>" name="id[]" type="text" style="display:none">
+                                            <td class="product-name"><a href="#"><?=$product_detail['product_name']?></a></td>
+                                            <td class="product-price-cart"><span class="amount">$<?=$product_detail['product_price']?></span></td>
                                             <td class="product-quantity">
                                                 <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
+                                                    <input class="cart-plus-minus-box" type="text" name="count[]" value="<?=$v['count']?>" />
                                                 </div>
                                             </td>
-                                            <td class="product-subtotal">$70.00</td>
+                                            <td class="product-subtotal">$<?=($v['count']*$product_detail['product_price'])?></td>
                                             <td class="product-remove">
+                                            
                                                 <a href="#"><i class="fa fa-pencil"></i></a>
-                                                <a href="#"><i class="fa fa-times"></i></a>
+                                                <button name="deleteThis" type="button" onclick="window.location.href='?index=<?=$count?>'"><i class="fa fa-times"></i></button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <a href="#"><img class="img-responsive ml-15px" src="/hmart/assets/images/product-image/2.webp" alt="" /></a>
-                                            </td>
-                                            <td class="product-name"><a href="#">Bluetooth Headphone</a></td>
-                                            <td class="product-price-cart"><span class="amount">$50.00</span></td>
-                                            <td class="product-quantity">
-                                                <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">$80.00</td>
-                                            <td class="product-remove">
-                                                <a href="#"><i class="fa fa-pencil"></i></a>
-                                                <a href="#"><i class="fa fa-times"></i></a>
-                                            </td>
-                                        </tr>
+
+                                                    <?php
+                                                    $count++;
+                                                }
+                                            }
+                                            // else{
+                                            //     echo "<td>Bạn chưa thêm hàng vào giỏ hàng</td>";
+                                            // }
+                                            
+                                            ?>
+                                            <!--  -->
                                     </tbody>
                                 </table>
                             </div>
@@ -184,17 +219,54 @@
                                 <div class="col-lg-12">
                                     <div class="cart-shiping-update-wrapper">
                                         <div class="cart-shiping-update">
-                                            <a href="#">Continue Shopping</a>
+                                            <a href="/">Tiếp tục mua hàng</a>
                                         </div>
-                                        <div class="cart-clear">
-                                            <button>Update Shopping Cart</button>
-                                            <a href="#">Clear Shopping Cart</a>
-                                        </div>
+                                        <?php
+                                        if(isset($_POST['clearCart'])){
+                                            $_SESSION['cart']=[];
+                                            echo "<script>alert('xoá thành công');window.location.href='/cart'</script>";
+                                        }
+                                       
+                                        ?>
+                                         <button type="submit" name="updateCart" class="cart-btn-2">Cập nhật giỏ hàng</button>
+                                        <form action="#" method="post" class="cart-clear">
+                                           
+                                            <button type="submit" name="clearCart" class="cart-btn-2" href="#">Xoá giỏ hàng</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                        <div class="row">
+                        <?php
+                        if(isset($_POST['checkout']) &&isset($_SESSION['cart'])){
+                            $user_id=0;
+                            $status=1;
+                            $address=$_POST['address'];
+                            //tạo order_id không bị trùng lặp
+                            $order_id=rand(10000000,99999999);
+                            
+                            while(mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM orders WHERE order_id=$order_id")))$order_id=rand(10000000,99999999);
+                            //
+                            @mysqli_query($conn,"INSERT into orders(order_id,user_id,order_date,address,status,total_amount)values($order_id,$user_id,NOW(),'$address','$status',$total)");
+                            //insert detail
+                            foreach($_SESSION['cart'] as $v){
+                                $product_id=$v['id'];
+                                $product_count=$v['count'];
+                                $ss=mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM products WHERE id=$product_id"));
+                                $sub_total=$ss['product_price']*$product_count;//tổng tiền mỗi sản phẩm nhân số lượng sản phẩm đó
+
+
+                                $detail_id=rand(1000,9999);
+                                while(mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM order_details WHERE detail_id=$detail_id")))$detail_id=rand(1000,9999);
+                                @mysqli_query($conn,"INSERT into order_details(order_id,detail_id,product_id,quantity,subtotal)values($order_id,$detail_id,$product_id,$product_count,$sub_total)");
+                            }
+                            session_unset();
+                            echo "<script>  alert('đặt hàng thành công');window.location.href='/'</script>";
+
+                        }
+                        
+                        ?>
+                        <form action="#" method="post" class="row">
                             <div class="col-lg-4 col-md-6 mb-lm-30px">
                                 <div class="cart-tax">
                                     <div class="title-wrap">
@@ -207,7 +279,7 @@
                                                 <label>
                                                     * Country
                                                 </label>
-                                                <select class="email s-email s-wid">
+                                                <select class="email s-email s-wid" required>
                                                     <option>Bangladesh</option>
                                                     <option>Albania</option>
                                                     <option>Åland Islands</option>
@@ -219,7 +291,7 @@
                                                 <label>
                                                     * Region / State
                                                 </label>
-                                                <select class="email s-email s-wid">
+                                                <select class="email s-email s-wid" required>
                                                     <option>Bangladesh</option>
                                                     <option>Albania</option>
                                                     <option>Åland Islands</option>
@@ -231,9 +303,9 @@
                                                 <label>
                                                     * Zip/Postal Code
                                                 </label>
-                                                <input type="text" />
+                                                <input type="text" required />
                                             </div>
-                                            <button class="cart-btn-2" type="submit">Get A Quote</button>
+                                            <button class="cart-btn-2" type="button">Get A Quote</button>
                                         </div>
                                     </div>
                                 </div>
@@ -245,10 +317,10 @@
                                     </div>
                                     <div class="discount-code">
                                         <p>Enter your coupon code if you have one.</p>
-                                        <form>
-                                            <input type="text" required="" name="name" />
-                                            <button class="cart-btn-2" type="submit">Apply Coupon</button>
-                                        </form>
+                                        <!-- <form> -->
+                                            <input type="text" required name="name" />
+                                            <button class="cart-btn-2" type="button">Áp dụng Coupon</button>
+                                        <!-- </form> -->
                                     </div>
                                 </div>
                             </div>
@@ -257,19 +329,22 @@
                                     <div class="title-wrap">
                                         <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
                                     </div>
-                                    <h5>Total products <span>$260.00</span></h5>
+                                    <div>
+                                        <input type="text" placeholder="địa chỉ nhận hàng" name="address" required>
+                                    </div>
+                                    <h5>Số sản phẩm <span><?=isset($_SESSION['cart'])?count($_SESSION['cart']):0?></span></h5>
                                     <div class="total-shipping">
-                                        <h5>Total shipping</h5>
+                                        <h5>Tiền ship</h5>
                                         <ul>
-                                            <li><input type="checkbox" /> Standard <span>$20.00</span></li>
-                                            <li><input type="checkbox" /> Express <span>$30.00</span></li>
+                                            <li><input name="1" type="radio" /> Standard <span>$20.00</span></li>
+                                            <li><input name="1" type="radio" /> Express <span>$30.00</span></li>
                                         </ul>
                                     </div>
-                                    <h4 class="grand-totall-title">Grand Total <span>$260.00</span></h4>
-                                    <a href="checkout.html">Proceed to Checkout</a>
+                                    <h4 class="grand-totall-title">Tổng tiền <span>$<?=$total?>.00</span></h4>
+                                    <button style="border:1px #000 solid;padding:10px 20px"href="checkout.html" type="submit" name="checkout">Proceed to Checkout</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

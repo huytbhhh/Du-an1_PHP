@@ -3,7 +3,7 @@
         <div class="pcoded-inner-navbar main-menu">
             <div class="pcoded-navigation-label">App</div>
             <ul class="pcoded-item pcoded-left-item">
-                <li class>
+                <li>
                     <a href="/admin/dashboard" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             <i class="feather icon-home"></i>
@@ -12,7 +12,7 @@
                     </a>
                 </li>
 
-                <li class>
+                <li>
                     <a href="/admin/users" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             <i class="feather icon-box"></i>
@@ -21,7 +21,7 @@
                     </a>
                 </li>
 
-                <li class>
+                <li>
                     <a href="/admin/categories" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             <i class="feather icon-layers"></i>
@@ -38,8 +38,24 @@
                         <span class="pcoded-mtext">Quản lý Sản phẩm</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/admin/orders" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-layers"></i>
+                        </span>
+                        <span class="pcoded-mtext">Quản lý đơn hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/contacts" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-layers"></i>
+                        </span>
+                        <span class="pcoded-mtext">Quản lý contact</span>
+                    </a>
+                </li>
 
-                
+
 
             </ul>
         </div>

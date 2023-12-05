@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Ductong\BaseMvc\Controllers\Admin;
 
@@ -6,12 +6,14 @@ use Ductong\BaseMvc\Controller;
 use Ductong\BaseMvc\Models\Category;
 use Ductong\BaseMvc\Models\Product;
 
-class ProductController extends Controller
-{
+class ProductController extends Controller {
+
+    // public function __construct() {
+    //     check_auth();
+    // }
 
     /* Lấy danh sách */
-    public function index()
-    {
+    public function index() {
         $products = (new Product())->all();
         $categories = (new Category())->all();
 
@@ -22,19 +24,17 @@ class ProductController extends Controller
             $arrayCategoryIdName[$category['id']] = $category['name'];
         }
 
-        $this->renderAdmin(
-            "products/index",
+        $this->renderAdmin("products/index", 
             [
-                "products" => $products,
+                "products" => $products, 
                 "arrayCategoryIdName" => $arrayCategoryIdName
             ]
         );
     }
 
     /* Thêm mới */
-    public function create()
-    {
-        if (isset($_POST["btn-submit"])) {
+    public function create() {
+        if (isset($_POST["btn-submit"])) { 
             $data = [
                 'category_id' => $_POST['category_id'],
                 'product_name' => $_POST['product_name'],
@@ -58,9 +58,9 @@ class ProductController extends Controller
                 // __DIR__ là 2 const mặc định của PHP để lấy ra đường dẫn thư mục hiện tại của ProductController 
                 $pathUpload = __DIR__ . '/../../../uploads/' . $img['name'];
 
-                if (move_uploaded_file($img['tmp_name'], $pathUpload)) {
+                if (move_uploaded_file($img['tmp_name'], $pathUpload)) { 
                     $data['image'] = $pathSaveDB;
-                }
+                } 
             }
 
             (new Product())->insert($data);
@@ -74,10 +74,9 @@ class ProductController extends Controller
     }
 
     /* Cập nhật */
-    public function update()
-    {
+    public function update() {
 
-        if (isset($_POST["btn-submit"])) {
+        if (isset($_POST["btn-submit"])) { 
             $data = [
                 'category_id' => $_POST['category_id'],
                 'product_name' => $_POST['product_name'],
@@ -95,10 +94,10 @@ class ProductController extends Controller
                 $pathSaveDB = '/uploads/' . $img['name'];
                 $pathUpload = __DIR__ . '/../../../uploads/' . $img['name'];
 
-                if (move_uploaded_file($img['tmp_name'], $pathUpload)) {
+                if (move_uploaded_file($img['tmp_name'], $pathUpload)) { 
                     $data['image'] = $pathSaveDB;
                     $flag = true;
-                }
+                } 
             }
 
             $conditions = [
@@ -106,12 +105,12 @@ class ProductController extends Controller
             ];
 
             (new Product())->update($data, $conditions);
-
+            
             if ($flag) {
 
                 // Xóa file dùng hàm unlink 
                 // Path file cũng phải giống như $pathUpload
-                $pathFile = __DIR__ . '/../../..' . $_POST['img_current'];
+                $pathFile = __DIR__ .'/../../..'. $_POST['img_current'];
                 unlink($pathFile);
             }
         }
@@ -123,15 +122,14 @@ class ProductController extends Controller
     }
 
     /* Xóa */
-    public function delete()
-    {
+    public function delete() {
         $conditions = [
             ['id', '=', $_GET['id']],
         ];
 
         (new Product())->delete($conditions);
 
-        $pathFile = __DIR__ . '/../../..' . $_POST['image'];
+        $pathFile = __DIR__ .'/../../..'. $_POST['image'];
         unlink($pathFile);
 
         header('Location: /admin/products');
