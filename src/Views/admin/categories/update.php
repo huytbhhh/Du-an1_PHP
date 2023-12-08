@@ -35,9 +35,14 @@
                                     <h5>Cập nhật </h5>
                                 </div>
                                 <div class="card-block">
+                                    <?php
+                                     $conn = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+                                     mysqli_set_charset($conn, "utf8");
+                                    $sql=mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM categories WHERE id='{$_GET['id']}'"));
+                                    ?>
                                     <form action="" method="post">
                                         <label for="name">Name</label>
-                                        <input type="text" name="name" class="form-control" value="<?= $category['name'] ?>">
+                                        <input type="text" name="name" class="form-control" value="<?= $sql['name_category'] ?>">
 
                                         <button type="submit" name="btn-submit" class="btn btn-info mt-3">Submit</button>
                                         <a href="/admin/categories" class="btn btn-primary mt-3">Quay lại d/s</a>

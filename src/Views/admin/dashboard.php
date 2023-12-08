@@ -1,3 +1,14 @@
+<?php
+$conn=mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+mysqli_set_charset($conn, "utf8");
+
+
+
+if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']==1) {
+    $Orders=mysqli_fetch_array(mysqli_query($conn,"SELECT sum(total_amount) as sum ,count(*) as count FROM orders "));
+    $total_Orders=$Orders['sum'];
+    $count_Orders=$Orders['count'];
+?>
 <div class="pcoded-content">
 
     <div class="page-header card">
@@ -35,8 +46,8 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h6 class="m-b-25">Impressions</h6>
-                                            <h3 class="f-w-700 text-c-blue">1,563</h3>
+                                            <h6 class="m-b-25">Số đơn hàng</h6>
+                                            <h3 class="f-w-700 text-c-blue"><?=$count_Orders?></h3>
                                             <p class="m-b-0">May 23 - June 01 (2017)</p>
                                         </div>
                                         <div class="col-auto">
@@ -51,8 +62,8 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h6 class="m-b-25">Goal</h6>
-                                            <h3 class="f-w-700 text-c-green">30,564</h3>
+                                            <h6 class="m-b-25">Doanh thu ước tính</h6>
+                                            <h3 class="f-w-700 text-c-green"><?=$total_Orders?> VNĐ</h3>
                                             <p class="m-b-0">May 23 - June 01 (2017)</p>
                                         </div>
                                         <div class="col-auto">
@@ -78,7 +89,44 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
+                    <div class="dt-responsive table-responsive">
+                                    <table id="simpletable" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <!-- <th>Img</th> -->
+                                                    <th>USER</th>
+                                                    <th>LOG</th>
+                                                    <th>TIME</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <?php
+                                                $query=mysqli_query($conn,"SELECT * FROM log ORDER by id desc");
+
+                                                ?>
+                                                <?php while($value=mysqli_fetch_assoc($query)){
+
+                                                    ?>
+                                                    
+                                                    <tr>
+                                                        <td><?= $value['id'] ?></td>
+                                                        <td><?= $value['user'] ?></td>
+                                                        <td><?= $value['msg'] ?></td>
+                                                        <td><?= $value['time'] ?></td>
+                                                       
+
+                                                       
+                                                    </tr>
+                                                   
+                                                <?php } ?>
+                                            </tbody>
+
+                                        </table>
+                                        </div>
 
                 </div>
 
@@ -87,3 +135,6 @@
     </div>
 </div>
 </div>
+<?php }else{?>
+<script>alert("Bạn không có quyền truy cập trang này");window.location.href="/"</script>;
+<?php }?>

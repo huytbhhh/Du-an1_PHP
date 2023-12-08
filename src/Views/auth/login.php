@@ -1,3 +1,12 @@
+<?php
+if(isset($_GET['logout'])){
+    session_start();
+    session_destroy();
+    echo"<script>alert('Đã đăng xuất');window.location.href='/'</script>";
+
+}
+else{
+?>
 <!DOCTYPE html>
 <html lang="zxx" dir="ltr">
 
@@ -290,6 +299,7 @@
                                             <?php
                                             $conn=mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
                                             mysqli_set_charset($conn, "utf8");
+                    
                                             if(isset($_POST['submit'])){
                                                 
                                                 $email=$_POST['email'];
@@ -299,8 +309,16 @@
                                                 if($check){
                                                     $_SESSION['username']=$check['username'];
                                                     $_SESSION['user']=$check['username'];
+                                                    $_SESSION['user_id']=$check['id'];
+                                                    $_SESSION['is_admin']=$check['is_admin'];
 
-                                                    echo"<script>alert('login thành công');window.location.href='./'</script>";
+                                                    if($check['is_admin']==1){
+                                                        echo"<script>alert('admin đã login thành công');window.location.href='./admin/dashboard'</script>";
+                                                    }
+                                                    else if($check['is_admin']==0){
+                                                        echo"<script>alert('user đã login thành công');window.location.href='./'</script>";
+                                                    }
+                                                    
                                                 }
                                                 else echo"<script>alert('tài khoản sai')</script>";
 
@@ -403,3 +421,4 @@
 
 <!-- Mirrored from htmldemo.net/hmart/hmart/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 14:24:36 GMT -->
 </html>
+<?php }?>

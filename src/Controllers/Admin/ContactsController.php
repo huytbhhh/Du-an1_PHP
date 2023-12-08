@@ -15,6 +15,7 @@ class ContactsController extends Controller
     /* Lấy danh sách */
     public function index()
     {
+        session_start();
         $contacts = (new Contact())->all();
 
         $this->renderAdmin("contacts/index", ["contacts" => $contacts]);

@@ -48,10 +48,15 @@
                                             </thead>
 
                                             <tbody>
+                                                <?php
+                                                $conn=mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+                                                mysqli_set_charset($conn, "utf8");
+                                                $query=mysqli_fetch_array(mysqli_query($conn,"SELECT * FROM categories"));
+                                                ?>
                                                 <?php foreach ($categories as $category) : ?>
                                                     <tr>
                                                         <td><?= $category['id'] ?></td>
-                                                        <td><?= $category['name'] ?></td>
+                                                        <td><?= $category['name_category'] ?></td>
                                                         <td>
                                                             <a href="/admin/categories/update?id=<?= $category['id'] ?>" class="btn btn-primary btn-sm">Cập nhật</a>
 

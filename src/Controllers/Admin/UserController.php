@@ -14,6 +14,8 @@ class UserController extends Controller
         Đây là hàm hiển thị danh sách user
     */
     public function index() {
+        session_start();
+
         $users = (new User)->all();
         
         $this->renderAdmin('users/index', ['users' => $users]);

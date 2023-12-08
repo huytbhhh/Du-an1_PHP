@@ -42,7 +42,7 @@
                                         <label for="category_id">Category</label>
                                         <select name="category_id" id="category_id" class="form-control">
                                             <?php foreach ($categories as $category) : ?>
-                                                <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                                                <option value="<?= $category['id'] ?>"><?= $category['name_category'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
 
@@ -54,12 +54,12 @@
 
                                         <label for="product_price_sale">Price sale</label>
                                         <input type="number" name="product_price_sale" id="product_price_sale" class="form-control">
-
+<!-- 
                                         <label for="is_active">Active</label>
                                         <select name="is_active" id="is_active" class="form-control">
                                             <option value="0">No</option>
                                             <option value="1" selected>Yes</option>
-                                        </select>
+                                        </select> -->
 
                                         <label for="description">Description</label>
                                         <textarea name="description" id="description" class="form-control"></textarea>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zxx" dir="ltr">
-<!-- <?php include("./connect.php"); ?> -->
 
 
 <!-- Mirrored from htmldemo.net/hmart/hmart/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 14:24:36 GMT -->
@@ -9,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hmart - Cart page</title>
+    <title>Hmart - Lịch sử mua hàng</title>
     <meta name="robots" content="index, follow" />
     <meta name="description" content="Hmart-Smart Product eCommerce html Template">
     <!-- Favicon -->
@@ -107,7 +106,7 @@
         <!-- Cart Area Start -->
         <div class="cart-main-area pt-100px pb-100px">
             <div class="container">
-                <h3 class="cart-page-title">Don hang da mua</h3>
+                <h3 class="cart-page-title">Đơn hàng đã mua</h3>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 
@@ -150,14 +149,16 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>ID don hang</th>
+                                        <th>ID đơn hàng</th>
 
-                                        <th>Ngay mua</th>
+                                        <th>Ngày mua</th>
                                         <th>Địa chỉ</th>
 
-                                        <th>Tong tien</th>
+                                        <th>Tổng tiền</th>
 
                                         <th>Trạng thái</th>
+                                        <th>SĐT</th>
+
 
 
                                         <th>Action</th>
@@ -173,14 +174,14 @@
                                             @mysqli_query($conn, "UPDATE orders SET status=0 WHERE order_id='{$_POST['cancel_id']}'"); //cap nhat status
                                             $log = $_SESSION['username'] . " đã huỷ đơn hàng id là " . $_POST['cancel_id'];
                                             @mysqli_query($conn, "INSERT into log(msg,user)values('$log','{$_SESSION['username']}')"); //log
-                                            echo "<script>  Toastify({text: 'Đã Huỷ Đơn hàng id " . $_POST['cancel_id'] . "',position: 'left', gravity: 'top',duration: 3000}).showToast();setTimeout(function() {window.location.href='/orders';}, 2000);</script>";
+                                            echo "<script>  Toastify({text: 'Đã Huỷ Đơn hàng id " . $_POST['cancel_id'] . "',position: 'left', gravity: 'top',duration: 3000}).showToast();setTimeout(function() {window.location.href='/Order_History';}, 2000);</script>";
                                         }
 
                                         // include("./connect.php");
                                         // session_start();
 
                                         $queries = mysqli_query($conn, "SELECT * FROM orders LIMIT 0");
-                                        if (isset($_SESSION['id'])) $queries = mysqli_query($conn, "SELECT * FROM orders WHERE user_id='{$_SESSION['id']}' ORDER BY order_date");
+                                        if (isset($_SESSION['user_id'])) $queries = mysqli_query($conn, "SELECT * FROM orders WHERE user_id='{$_SESSION['user_id']}' ORDER BY order_date LIMIT 20");
                                         while ($row = mysqli_fetch_array($queries)) {
                                             $checkStatus = array(0 => '<str style="color:red">Đã Huỷ</str>', 1 => "Đang chuẩn bị hàng", 2 => "Đang vẫn chuyển", 3 => '<str style="color:green">Đã vận chuyển</str>');
                                             $status_info = $checkStatus[$row['status']];
@@ -192,7 +193,7 @@
                                             $user_buy = $_SESSION['username'];
                                             $ds_product = "";
                                             //
-                                            $onDetail = mysqli_query($conn, "SELECT * FROM order_details WHERE order_id=$id_order LIMIT 20");
+                                            $onDetail = mysqli_query($conn, "SELECT * FROM order_details WHERE order_id=$id_order ");
 
 
                                             while ($value = mysqli_fetch_assoc($onDetail)) {
@@ -214,11 +215,14 @@
                                                 <td class="product-name">
                                                     <?= $status_info ?>
                                                 </td>
+                                                <td class="product-name">
+                                                    <?= $row['phone'] ?>
+                                                </td>
 
 
                                                 <td class="product-remove">
 
-                                                    <form action="/orders" method="post">
+                                                    <form action="/Order_History" method="post">
                                                         <!-- <a href="#"><i class="fa fa-pencil"></i></a> -->
                                                         <input type="number" name="cancel_id" value="<?= $row['order_id'] ?>" style="display:none">
 

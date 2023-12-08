@@ -1,3 +1,9 @@
+<?php
+$conn=mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+mysqli_set_charset($conn, "utf8");
+if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']==1) {
+    
+?>
 <div class="pcoded-content">
 
     <div class="page-header card">
@@ -46,8 +52,9 @@
                                     <div onclick="hide()" id="popup" style="display:none;top:0px;left:0px;position: fixed;z-index:10000;background:#cccccc82;width:100%;height:100vh;justify-content:center">
                                         <div style="border:1px #000 solid;border-radius:10px;display:grid;grid-template-columns:200px 1fr;background:#fff;min-height:300px;max-height:600px;margin-top:60px;width:700px">
                                             <span>ID đơn hàng  :</span><span id="id_order"> id_order</span>
+                                            
                                         
-                                            <span>Người mua  :</span><span id="user_buy"> user_buy</span>
+                                            <span>Người mua  :</span><span id="user_buy"> user_buy </span>
                                             <span>Số lượng sản phẩm mua  :</span><span id="quantity"> quantity</span>
                                             <span>Danh sách  :</span>
                                                 <span id="ds_product" style="border:1px #ccc solid;display:grid;grid-template-columns:1fr 1fr 1fr"> ds_product</span>
@@ -70,6 +77,7 @@
                                                     <th>TỔNG TIỀN</th>
                                                     <th>Ngày tạo</th>
                                                     <th>Địa chỉ</th>
+
                                                 
                                                     <th>Trạng thái</th>
 
@@ -84,8 +92,8 @@
 
                                             <tbody>
                                                 <?php
-                                                $conn=mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-                                                mysqli_set_charset($conn, "utf8");
+                                             
+                                                
 
                                                 $products=mysqli_query($conn,"SELECT * FROM orders");
 
@@ -127,22 +135,25 @@
                                                         <td><?= $total ?> VNĐ</td>
                                                         <td><?= $product['order_date'] ?></td>
                                                         <td><?= $product['address'] ?></td>
+
                                                         <form action="./orders" method="post">
                                                         
                                                         <td style="display:none"><input type="number" name="id" value="<?=$id_order?>" style="display:none"></td>
 
                                                         <td>
                                                             <select name="status">
-                                                                <option value="1" <?=($product['status']==1)?"selected":""?> >Đã xác nhận</option>
-                                                                <option value="2" <?=($product['status']==2)?"selected":""?> >Đang giao hàng</option>
-                                                                <option value="3" <?=($product['status']==3)?"selected":""?> >Đơn hoàn thành</option>
+                                                            <option value="0" <?=($product['status']==0)?"selected":""?> >Da huy</option>
+
+                                                                <option value="1" <?=($product['status']==1)?"selected":""?> >Đang chuẩn bị hàng</option>
+                                                                <option value="2" <?=($product['status']==2)?"selected":""?> >Đang vẫn chuyển</option>
+                                                                <option value="3" <?=($product['status']==3)?"selected":""?> >Đã vận chuyển</option>
 
 
                                                             </select>
                                                         </td>
 
                                                         <td>
-                                                            <button type="button" onclick="show('<?=$id_order?>','<?=$user_buy?>','<?=$quantity?>','<?=$total?>','<?=$ds_product?>')" style="border:1px #ccc solid;background:linear-gradient(45deg,#ccc,#fff);">Xem chi tiết</button>
+                                                            <button type="button" onclick="show('<?=$id_order?>','<?=$user_buy?>','<?=$quantity?>','<?=$total?>','<?=$ds_product?>','<?=$product['phone']?>')" style="border:1px #ccc solid;background:linear-gradient(45deg,#ccc,#fff);">Xem chi tiết</button>
                                                             <button type="submit"  name="change_status">Lưu</button>
                                                         </td>
                                                         </form>
@@ -156,9 +167,9 @@
                                         </table>
                                         <script>
 
-                                            function show(id_order,user_buy,quantity,total,ds_product){
+                                            function show(id_order,user_buy,quantity,total,ds_product,phone){
                                                 document.getElementById('id_order').innerHTML=id_order;
-                                                document.getElementById('user_buy').innerHTML=user_buy;
+                                                document.getElementById('user_buy').innerHTML=user_buy + " số điện thoại " +phone;
                                                 document.getElementById('quantity').innerHTML=quantity;
                                                 document.getElementById('total').innerHTML=total +" VNĐ";
                                                 document.getElementById('ds_product').innerHTML="<div style='border-bottom: 1px #ccc solid;max-height:30px'>Tên</div><div style='border-bottom: 1px #ccc solid;max-height:30px'>Số lượng</div><div style='border-bottom: 1px #ccc solid;max-height:30px'>tổng</div>"+ds_product;
@@ -185,3 +196,6 @@
     </div>
 </div>
 </div>
+<?php }else{?>
+<script>alert("Bạn không có quyền truy cập trang này");window.location.href="/"</script>;
+<?php }?>

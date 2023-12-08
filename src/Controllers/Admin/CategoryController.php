@@ -25,7 +25,10 @@ class CategoryController extends Controller {
                 'name' => $_POST['name'],
             ];
 
-            (new Category())->insert($data);
+            // (new Category())->insert($data);
+            $conn = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+            mysqli_set_charset($conn, "utf8");
+            @mysqli_query($conn,"INSERT into categories(name_category)values('{$_POST['name']}')");
 
             header('Location: /admin/categories');
         }
@@ -45,12 +48,17 @@ class CategoryController extends Controller {
                 ['id', '=', $_GET['id']],
             ];
 
-            (new Category())->update($data, $conditions);
+            // (new Category())->update($data, $conditions);
+            $conn = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+            mysqli_set_charset($conn, "utf8");
+            @mysqli_query($conn,"UPDATE categories SET name_category='{$_POST['name']}' WHERE id='{$_GET['id']}'");
+            // header("location : /admin/categories");
+            echo "<script>window.location.href='/admin/categories'</script>";
         }
 
-        $category = (new Category())->findOne($_GET["id"]);
-
-        $this->renderAdmin("categories/update", ["category" => $category]);
+        // $category = (new Category())->findOne($_GET["id"]);
+       
+       $this->renderAdmin("categories/update", ["category" => $category]);
     }
 
     /* Xóa */

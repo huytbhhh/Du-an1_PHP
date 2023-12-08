@@ -1,3 +1,9 @@
+<?php
+$conn=mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+mysqli_set_charset($conn, "utf8");
+if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']==1) {
+    
+?>
 <div class="pcoded-content">
 
     <div class="page-header card">
@@ -75,3 +81,6 @@
     </div>
 </div>
 </div>
+<?php }else{?>
+<script>alert("Bạn không có quyền truy cập trang này");window.location.href="/"</script>;
+<?php }?>

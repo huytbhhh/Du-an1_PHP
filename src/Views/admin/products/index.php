@@ -1,3 +1,9 @@
+<?php
+$conn=mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+mysqli_set_charset($conn, "utf8");
+if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']==1) {
+    
+?>
 <div class="pcoded-content">
 
     <div class="page-header card">
@@ -62,7 +68,7 @@
                                                         <td><?= $product['product_name'] ?></td>
                                                         <td><?= $product['product_price'] ?></td>
                                                         <td><?= $product['product_price_sale'] ?></td>
-                                                        <td><?= $arrayCategoryIdName[$product['category_id']] ?></td>
+                                                        <td><?= $arrayCategoryIdName[$product['id_categories']] ?></td>
                                                         <td><?= $product['description'] ?></td>
                                                         <td><?= $product['is_active'] ? 'Yes' : 'No' ?></td>
                                                         <td>
@@ -90,3 +96,7 @@
     </div>
 </div>
 </div>
+
+<?php }else{?>
+<script>alert("Bạn không có quyền truy cập trang này");window.location.href="/"</script>;
+<?php }?>

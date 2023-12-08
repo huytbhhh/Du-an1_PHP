@@ -6,6 +6,9 @@ use Ductong\BaseMvc\Controller;
 use Ductong\BaseMvc\Models\Category;
 use Ductong\BaseMvc\Models\Product;
 
+$conn = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+mysqli_set_charset($conn, "utf8");
+
 class ProductController extends Controller {
 
     // public function __construct() {
@@ -14,6 +17,8 @@ class ProductController extends Controller {
 
     /* Lấy danh sách */
     public function index() {
+        session_start();
+
         $products = (new Product())->all();
         $categories = (new Category())->all();
 
@@ -21,7 +26,7 @@ class ProductController extends Controller {
         // Tạo ra mảng này để hiển thị tên danh mục sản phẩm ở danh sách
         $arrayCategoryIdName = [];
         foreach ($categories as $category) {
-            $arrayCategoryIdName[$category['id']] = $category['name'];
+            $arrayCategoryIdName[$category['id']] = $category['name_category'];
         }
 
         $this->renderAdmin("products/index", 
@@ -36,12 +41,12 @@ class ProductController extends Controller {
     public function create() {
         if (isset($_POST["btn-submit"])) { 
             $data = [
-                'category_id' => $_POST['category_id'],
+                'id_categories' => $_POST['category_id'],
                 'product_name' => $_POST['product_name'],
                 'product_price' => $_POST['product_price'],
                 'product_price_sale' => $_POST['product_price_sale'] ?: 0,
                 'description' => $_POST['description'],
-                'is_active' => $_POST['is_active'],
+              
             ];
 
             $data['image'] = null;
@@ -62,10 +67,20 @@ class ProductController extends Controller {
                     $data['image'] = $pathSaveDB;
                 } 
             }
+            $price_sale= $_POST['product_price_sale'] ?: 0;
+            // (new Product())->insert($data);
+                $id_categories = $_POST['category_id'];
+                $product_price = $_POST['product_price'];
+                $des=$_POST['description'];
+            $product_name = $_POST['product_name'];
+            // echo 1111111111;
+            $conn = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+mysqli_set_charset($conn, "utf8");
+            @mysqli_query($conn,"INSERT into products(id_categories,product_name,product_price,product_price_sale,description,image,image2,image3,origin,view)values('$id_categories','$product_name','$product_price','$price_sale', '$des','1','1','1','12345','1') ");
+            // @mysqli_query($conn,"UPDATE products SET id =23 where id = 21");
 
-            (new Product())->insert($data);
 
-            header('Location: /admin/products');
+            // header('Location: /admin/products');
         }
 
         $categories = (new Category())->all();
@@ -78,15 +93,16 @@ class ProductController extends Controller {
 
         if (isset($_POST["btn-submit"])) { 
             $data = [
-                'category_id' => $_POST['category_id'],
+                'id_categories' => $_POST['category_id'],
                 'product_name' => $_POST['product_name'],
                 'product_price' => $_POST['product_price'],
                 'product_price_sale' => $_POST['product_price_sale'] ?: 0,
                 'description' => $_POST['description'],
                 'is_active' => $_POST['is_active'],
+                'image' => $_POST['img_current']
+
             ];
 
-            $data['image'] = $_POST['img_current'];
             $img = $_FILES['image'] ?? null;
             $flag = false;
             if ($img) {
@@ -104,14 +120,19 @@ class ProductController extends Controller {
                 ['id', '=', $_GET['id']],
             ];
 
-            (new Product())->update($data, $conditions);
+            // (new Product())->update($data, $conditions);
+            $conn = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+mysqli_set_charset($conn, "utf8");
+            @mysqli_query($conn,"UPDATE products SET image='{$_POST['img_current']}'   , description ='{$_POST['description']}',  id_categories = '{$_POST['category_id']}',product_name = '{$_POST['product_name']}', product_price ='{$_POST['product_price']}' WHERE id='{$_GET['id']}'");
+
+            // @mysqli_query($conn,"UPDATE products SET image='{$_POST['img_current']}' , is_active ='{$_POST['is_active']}'  , description ='{$_POST['description']}',  id_categories = '{$_POST['category_id']}',product_name = '{$_POST['product_name']}', product_price ='{$_POST['product_price']}' WHERE id='{$_GET['id']}'");
             
             if ($flag) {
 
                 // Xóa file dùng hàm unlink 
                 // Path file cũng phải giống như $pathUpload
                 $pathFile = __DIR__ .'/../../..'. $_POST['img_current'];
-                unlink($pathFile);
+                // unlink($pathFile);
             }
         }
 

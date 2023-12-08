@@ -10,6 +10,8 @@ use Ductong\BaseMvc\Controllers\Admin\ContactsController;
 use Ductong\BaseMvc\Controllers\Admin\DashboardController;
 use Ductong\BaseMvc\Controllers\Client\HomeController;
 use Ductong\BaseMvc\Controllers\Client\CartController;
+use Ductong\BaseMvc\Controllers\Client\Client_OrderController;
+
 use Ductong\BaseMvc\Controllers\Client\AboutController;
 use Ductong\BaseMvc\Controllers\Client\ContactController;
 
@@ -22,6 +24,8 @@ $router = new Router();
 
 $router->addRoute('/', HomeController::class, 'index');
 $router->addRoute('/cart', CartController::class, 'index');
+$router->addRoute('/Order_History', Client_OrderController::class, 'index');
+
 $router->addRoute('/single-product', SingleProductController::class, 'index');
 $router->addRoute('/about', AboutController::class, 'index');
 $router->addRoute('/contact', ContactController::class, 'index');

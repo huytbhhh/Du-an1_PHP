@@ -13,7 +13,14 @@
                         <ul>
                             <li><a href="tel:0123456789"><i class="fa fa-phone"></i> +012 3456 789</a></li>
                             <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a></li>
-                            <li><a href="my-account.html"><i class="fa fa-user"></i> Account</a></li>
+                            <li style="min-width:100px;display:flex"><?php if(isset($_SESSION['username'])){?>
+                                <a href="/login?logout"><i class="fa fa-user"></i> Đăng xuất</a>
+                                &ensp;
+                                <a href="/Order_History"> Trang orders</a>
+
+                                <?php }else{?>
+                                    <a href="/login"><i class="fa fa-user"></i> Đăng nhập</a>
+                                    <?php }?></li>
                         </ul>
                     </div>
                 </div>
